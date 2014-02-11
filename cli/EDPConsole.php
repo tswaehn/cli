@@ -53,6 +53,33 @@
   }
   
   
+  function getTables(){
+    
+    $table = "tables";
+    $search = "*";
+    if (_REAL_EDP_ == 1){    
+      $lines = shell_exec( 'EDPConsole '.$table.' '.$search );
+      
+      $filename='edp-'.$table.'.dat';
+      file_put_contents( $filename, $lines );
+    }
+    
+  }
+  
+  function getFieldNames( $table ){
+  
+    $table = "fieldnames";
+    $search = $table;
+    if (_REAL_EDP_ == 1){    
+      $lines = shell_exec( 'EDPConsole '.$table.' '.$search );
+      
+      $filename='edp-fieldnames-'.$table.'.dat';
+      file_put_contents( $filename, $lines );
+    }
+    
+  
+  }
+  
   function getData( $table, $search ){
     
     if (_REAL_EDP_ == 1){
@@ -60,7 +87,7 @@
       lg( "search: ".$search );
       $lines = shell_exec( 'EDPConsole '.$table.' '.$search );
       
-      $filename='edp-input.dat';
+      $filename='edp-input-'.$table.'.dat';
       file_put_contents( $filename, $lines );
     } else {
       lg("EDPConsole - simulate" );

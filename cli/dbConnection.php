@@ -7,10 +7,12 @@
   include( 'lib.php' );
   include( 'EDPConsole.php');
 
-  echo "<pre>";
-  lg( "start" );
-  $pdo = new PDO('mysql:host=localhost;dbname='.$dbname, $user, $pass);
-
+  function connectToDb(){
+    
+    $pdo = new PDO('mysql:host=localhost;dbname='.$dbname, $user, $pass);  
+    
+  }
+  
   function tableExists( $table ){
     global $pdo;
     
@@ -160,18 +162,5 @@
     insertIntoTable( $table, $fields, $lines );
     
   }
-  
-  
-  $import_tables=array( array( "table"=>"Teil:Artikel", "search"=>"nummer=7500-00000!7500-99999") );
-  
-  foreach ($import_tables as $table){
-    $tablename = $table["table"];
-    $search=$table["search"];
 
-    importTable( $tablename, $search );
-    
-  }
-  
-  lg( "bye" );
-  echo "</pre>";
 ?> 
