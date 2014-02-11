@@ -59,6 +59,9 @@
       lg( "table: ".$table );
       lg( "search: ".$search );
       $lines = shell_exec( 'EDPConsole '.$table.' '.$search );
+      
+      $filename='edp-input.dat';
+      file_put_contents( $filename, $lines );
     } else {
       lg("EDPConsole - simulate" );
       $filename='test.dat';
