@@ -11,7 +11,7 @@
   
   getTables();
   
-  getFieldNames( "Teil:Artikel" );
+  $fieldnames = getFieldNames( "Teil:Artikel" );
   
   $import_tables=array( array( "table"=>"Teil:Artikel", "search"=>"nummer=7500-00000!7500-99999") );
   

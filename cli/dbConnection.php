@@ -8,7 +8,7 @@
   include( 'EDPConsole.php');
 
   function connectToDb(){
-    
+    global $dbname,$user,$pass,$pdo;
     $pdo = new PDO('mysql:host=localhost;dbname='.$dbname, $user, $pass);  
     
   }
@@ -133,7 +133,9 @@
     
     foreach ($lines as $line){
       $values = array();
-      $count = count( $line );
+      $count_lines = count( $line );
+      $count_insert= count( $insert );
+      $count = min( $count_lines, $count_insert );
       for ($i=0;$i<$count;$i++){
 	$key = $insert[$i];
 	$value = $line[$i];

@@ -54,44 +54,73 @@
   
   
   function getTables(){
-    
+  
     $table = "tables";
     $search = "*";
+  
+    $filename='edp-'.$table.'.dat';
+    $filename = preg_replace( '/:/','-',$filename);      
+    
     if (_REAL_EDP_ == 1){    
       $lines = shell_exec( 'EDPConsole '.$table.' '.$search );
       
-      $filename='edp-'.$table.'.dat';
       file_put_contents( $filename, $lines );
+    } else {
+    
+      $line = file_get_contents( $filename );
+      
     }
     
   }
   
   function getFieldNames( $table ){
   
-    $table = "fieldnames";
-    $search = $table;
+    $filename='edp-fieldnames-'.$table.'.dat';
+    $filename = preg_replace( '/:/','-',$filename);
+ 
+    $par1 = "fieldnames";
+    $par2 = $table;
     if (_REAL_EDP_ == 1){    
-      $lines = shell_exec( 'EDPConsole '.$table.' '.$search );
+      $lines = shell_exec( 'EDPConsole '.$par1.' '.$par2 );
       
-      $filename='edp-fieldnames-'.$table.'.dat';
       file_put_contents( $filename, $lines );
+    } else {
+      
+      $line = file_get_contents( $filename );
+    
     }
     
-  
+    $data = stringsToArray( $line );
+    $lines = $data['lines'];
+    $fieldnames = array();
+    $fieldnames_str='';
+    foreach ($lines as $line){
+      $field = $line[0];
+      $fieldnames[] = $field;
+      $fieldnames_str .= ','.$field;
+      
+    }
+    
+    lg( "fieldnames of ".$table." are ".count($fieldnames ) );
+    lg( $fieldnames_str );
+    return $fieldnames;
   }
   
+
   function getData( $table, $search ){
-    
+
+    $filename='edp-input-'.$table.'.dat';
+    $filename = preg_replace( '/:/','-',$filename);
+
     if (_REAL_EDP_ == 1){
       lg( "table: ".$table );
       lg( "search: ".$search );
       $lines = shell_exec( 'EDPConsole '.$table.' '.$search );
       
-      $filename='edp-input-'.$table.'.dat';
       file_put_contents( $filename, $lines );
+      
     } else {
       lg("EDPConsole - simulate" );
-      $filename='test.dat';
       $lines = file_get_contents( $filename );
     }
     
