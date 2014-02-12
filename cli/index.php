@@ -16,7 +16,13 @@
   $import_tables=array( 
       
       array( "table"=>"Teil:Artikel", "search"=>"nummer=0000-00000!1999-99999"),
-      array( "table"=>"Teil:Artikel", "search"=>"nummer=2000-00000!2999-99999"),
+
+      array( "table"=>"Teil:Artikel", "search"=>"nummer=2000-00000!2199-99999"),
+      array( "table"=>"Teil:Artikel", "search"=>"nummer=2200-00000!2399-99999"),
+      array( "table"=>"Teil:Artikel", "search"=>"nummer=2400-00000!2599-99999"),
+      array( "table"=>"Teil:Artikel", "search"=>"nummer=2600-00000!2799-99999"),
+      array( "table"=>"Teil:Artikel", "search"=>"nummer=2800-00000!2999-99999"),
+
       array( "table"=>"Teil:Artikel", "search"=>"nummer=3000-00000!3999-99999"),
       array( "table"=>"Teil:Artikel", "search"=>"nummer=4000-00000!4999-99999"),
       array( "table"=>"Teil:Artikel", "search"=>"nummer=5000-00000!5999-99999"),

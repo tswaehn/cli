@@ -52,6 +52,8 @@
   
   function renderMedia( $article ){
     div("artikel");
+    
+    disp('<a href="./article/download.php">download</a>');
     disp( "pdf ".$article["ypdf1"] );
     disp( "dxf ".$article["ydxf"] );
     disp( "dxf ".$article["yxls"] );
