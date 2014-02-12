@@ -83,7 +83,7 @@
     $par1 = "fieldnames";
     $par2 = $table;
     if (_REAL_EDP_ == 1){    
-      $lines = shell_exec( 'EDPConsole '.$par1.' '.$par2 );
+      $line = shell_exec( 'EDPConsole '.$par1.' '.$par2 );
       
       file_put_contents( $filename, $lines );
     } else {
