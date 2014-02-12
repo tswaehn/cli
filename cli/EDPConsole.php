@@ -7,11 +7,13 @@
     return $elements;
   }
 
-  function stringsToArray( $lines ){
+  function stringsToArray( $contents ){
 
     $isFirst=1;
     $data=array( 'fields'=> array(), 'lines'=>array() );
-    foreach(preg_split("/((\r?\n)|(\r\n?))/", $lines) as $line){
+    $contents=preg_replace("/[^A-Za-z0-9\n#,>]/", '', $contents);
+    //print_r($contents);
+    foreach(preg_split("/((\r?\n)|(\r\n?))/", $contents) as $line){
 
       if (strpos($line, 'DATA>') !== FALSE){
 	if ($isFirst){
@@ -115,16 +117,16 @@
     if (_REAL_EDP_ == 1){
       lg( "table: ".$table );
       lg( "search: ".$search );
-      $lines = shell_exec( 'EDPConsole '.$table.' '.$search );
+      $contents = shell_exec( 'EDPConsole '.$table.' '.$search );
       
       file_put_contents( $filename, $lines );
       
     } else {
       lg("EDPConsole - simulate" );
-      $lines = file_get_contents( $filename );
+      $contents = file_get_contents( $filename );
     }
     
-    $data = stringsToArray( $lines );
+    $data = stringsToArray( $contents );
     return $data;  	
   
   
