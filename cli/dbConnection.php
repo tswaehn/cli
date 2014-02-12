@@ -118,7 +118,8 @@
 
 	$data = array();
 	for ($i=0;$i<$count;$i++){
-	  $data[] = preg_replace("/[^A-Za-z0-9]/", "", $line[$i]);
+	  //$data[] = preg_replace("/[^A-Za-z0-9\-\ ]/", "", $line[$i]);
+	  $data[] = $line[$i];
 
 	}
 	
@@ -169,7 +170,7 @@
     
     $f=$data['fields'];
     $lines=$data['lines'];
-    /*
+
     $fields=array();
     for ($i=0;$i<70;$i++){
       if ($i==58){
@@ -177,7 +178,7 @@
       }
       $fields[]=$f[$i];
     }
-    */
+
     $fields = $f;
     
     prepareTable( $table, $fields, $mode );

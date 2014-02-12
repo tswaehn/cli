@@ -11,7 +11,7 @@
 
     $isFirst=1;
     $data=array( 'fields'=> array(), 'lines'=>array() );
-    $contents=preg_replace("/[^A-Za-z0-9\n#,>]/", '', $contents);
+    //$contents=preg_replace("/[^A-Za-z0-9\n#,>\-\ \ö\ä\ü\Ö\Ä\Ü\ß]/", '', $contents);
     //print_r($contents);
     foreach(preg_split("/((\r?\n)|(\r\n?))/", $contents) as $line){
 
@@ -119,7 +119,7 @@
       lg( "search: ".$search );
       $contents = shell_exec( 'EDPConsole '.$table.' '.$search );
       
-      file_put_contents( $filename, $lines );
+      file_put_contents( $filename, $contents );
       
     } else {
       lg("EDPConsole - simulate" );
