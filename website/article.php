@@ -6,12 +6,14 @@
     include('./lib.php');
 
     include('dbConnection.php');
-  
-    $title = "Suchen";
+    
+    $title = "Artikel anzeigen";
+    
+    $abas_nr = getUrlParam('abas_nr');    
     ?>
 
 <title>
-..::Glaskugel::..
+<?php echo $abas_nr ?> ..::Glaskugel::.. 
 </title>
 </head>
 
@@ -22,11 +24,12 @@
   </div>
   
   <div id="searchform">
-    <?php include('./searchForm.php'); ?>    
+    <?php include('./articleSelect.php'); ?>    
   </div>
   
-  <div id="searchresult">
-    <?php include('./searchResult.php'); ?>  
+  <div id="articleview">
+    <?php include('./articleView.php'); ?>  
   </div>
   
 </html>
+ 

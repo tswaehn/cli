@@ -1,0 +1,40 @@
+
+#head {
+  border:thin solid grey;
+  background-color: #aaaaaa;
+  
+  width:100%;
+  padding:10px;
+}
+
+#title {
+  text-align:center;
+  font-size:large;
+  font-weight:bold;
+  
+}
+
+#nav {
+  font-size:small;
+}
+
+#searchform {
+
+  border:thin solid grey;
+  
+  width:100%;
+  text-align:center;
+  
+  padding-top:20px;
+  padding-bottom:20px;
+
+}
+
+#articleview {
+
+  border:thin solid grey;
+  
+  margin-top:10px;
+  padding:20px;
+
+}

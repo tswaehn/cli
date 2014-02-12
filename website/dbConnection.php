@@ -4,7 +4,6 @@
   define('_CLEAN_', 'clean' );
   
   include( 'config.txt');
-  include( 'lib.php' );
 
   function connectToDb(){
     global $dbname,$user,$pass,$pdo;
@@ -180,12 +179,12 @@
       if ($item == $first){
 	$sql .= $item. " LIKE '%".$search."%'";
       } else {
-	$sql .= ' OR '.$item. " LIKE '%".$search."%'";
+	$sql .= ' OR '.q($item). " LIKE '%".$search."%'";
       }
     }
 
     $sql .= ');';
-   
+    
     try {
 	lg($sql);
 	$result = $pdo->query( $sql);
@@ -194,6 +193,7 @@
 	return;
     } 
     
+    print_r( $result);
     lg('found '.$result->rowCount().' items' );
     
     return $result;

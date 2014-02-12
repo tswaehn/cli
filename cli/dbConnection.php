@@ -110,7 +110,7 @@
     // query
     try {
       $sql = "INSERT INTO ".q($table)." VALUES (".$placeholder.")";
-      lg($sql);
+      //lg($sql);
       
       $q = $pdo->prepare($sql);
       
@@ -160,7 +160,7 @@
  
   
   
-  function importTable( $table, $search ){
+  function importTable( $table, $search, $mode ){
     
     // array with 
     $data = getData( $table, $search );
@@ -180,7 +180,7 @@
     */
     $fields = $f;
     
-    prepareTable( $table, $fields, _CLEAN_ );
+    prepareTable( $table, $fields, $mode );
   
     insertIntoTable( $table, $fields, $lines );
     

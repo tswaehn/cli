@@ -1,0 +1,15 @@
+<?php
+
+  $user='root';
+  $pass='Am79#xtd';
+  
+  $dbname = 'abas-shadow';
+  
+  $dbmode = _UPDATE_;
+  
+  define('_REAL_EDP_', 0);
+  
+  ?>
+  
+ 
+ 
