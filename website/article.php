@@ -3,9 +3,12 @@
 <link rel="stylesheet" type="text/css" href="format.css">
 
 <?php 
-    include('./lib.php');
-
-    include('dbConnection.php');
+    
+    //include('lib.php');
+    
+    include('../cli/dbConnection.php');
+    include('./article/dbArticle.php');
+    
     
     $title = "Artikel anzeigen";
     
@@ -19,16 +22,16 @@
 
   <div id="head">
     
-    <?php include('./head.php'); ?>
+    <?php include('head.php'); ?>
     
   </div>
   
   <div id="searchform">
-    <?php include('./articleSelect.php'); ?>    
+    <?php include('./article/articleSelect.php'); ?>    
   </div>
   
   <div id="articleview">
-    <?php include('./articleView.php'); ?>  
+    <?php include('./article/articleView.php'); ?>  
   </div>
   
 </html>

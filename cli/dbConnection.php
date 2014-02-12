@@ -134,6 +134,62 @@
     lg( "insert into tables complete" );
   
   }
+
+
+  function getColumns( $table ){
+    global $pdo;
+    
+    $sql = 'SHOW COLUMNS FROM '.q($table).';';
+
+    try {
+	lg($sql);
+	$result = $pdo->query( $sql);
+    } catch (Exception $e) {
+	lg("search failed");
+	return;
+    } 
+    
+    $columns = array();
+    foreach( $result as $item ){
+      $columns[] = $item['Field'];
+    }
+    
+    return $columns;
+  }
+  
+  
+  function searchInTable( $table, $search ){
+    global $pdo;
+    
+    $columns = getColumns( $table );
+    
+    $sql = 'SELECT * FROM `abas-shadow`.'.q($table).' WHERE (';
+    
+    $first = $columns[0];
+    foreach ($columns as $item){
+      if ($item == $first){
+	$sql .= $item. " LIKE '%".$search."%'";
+      } else {
+	$sql .= ' OR '.q($item). " LIKE '%".$search."%'";
+      }
+    }
+
+    $sql .= ');';
+    
+    try {
+	lg($sql);
+	$result = $pdo->query( $sql);
+    } catch (Exception $e) {
+	lg("search failed");
+	return;
+    } 
+    
+    print_r( $result);
+    lg('found '.$result->rowCount().' items' );
+    
+    return $result;
+  
+  }
   
   function prepareTable( $table, $fields, $mode ){
     global $pdo;

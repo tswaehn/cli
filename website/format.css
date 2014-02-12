@@ -38,3 +38,12 @@
   padding:20px;
 
 }
+
+#artikel {
+  padding:5px;
+  margin:5px;
+  
+  border: thin solid #aaaaaa;
+  
+  font-size:small;
+}
