@@ -51,7 +51,7 @@
   }
   
   function renderMedia( $article ){
-    div("artikel");
+    div("media");
     
     disp('<a href="./article/download.php">download</a>');
     disp( "pdf ".$article["ypdf1"] );
@@ -90,15 +90,27 @@
     [elarta] => Arbeitsgang
     [721] => Arbeitsgang
   */
-    div("artikel");
+    div("fertigungsliste");
     
     $abas_nr = $article["nummer"];
     
     $result = getAllItems( $abas_nr );
     disp( "");
+    
+    disp( "<table>" );
+
     foreach ($result as $item ){
-      disp( $item["zn"]." ".$item["tabnr"]." ".$item["anzahl"]." ".$item["elanzahl"]." ".$item["elart"]." ".$item["elarta"]." ".$item["elem"]." ".$item["elex"] );
+      //disp( $item["zn"]." ".$item["tabnr"]." ".$item["anzahl"]." ".$item["elanzahl"]." ".$item["elart"]." ".$item["elarta"]." ".$item["elem"]." ".$item["elex"] );
+      echo "<tr>";
+      echo "<td>".$item["zn"]."</td>";
+      echo '<td><a href="article.php?abas_nr='.$item["elem"].'">'.$item["elem"]."</td>";
+      echo "<td>".$item["elarta"]."</td>";
+      echo "<td>".$item["elex"]."</td>";    
+      echo "<td>".$item["anzahl"]."</td>";        
+      
+      echo "</tr>";
     }
+    disp( "</table>" );
     
     ediv();
   }
@@ -110,12 +122,18 @@
   echo "</pre>";
   
   $article = $result->fetch();
+
+  echo "<table>";
+  echo "<tr><td>";
+    renderMedia( $article );
+  echo "</td><td>";
+    renderInfo( $article );
+  echo "</td></tr>";
+  echo "</table>";
   
-  renderInfo( $article );
   renderLager($article );
   renderFertigung($article);
   renderBestellung($article);
   
-  renderMedia( $article );
   renderFertingsliste( $article );  
 ?>

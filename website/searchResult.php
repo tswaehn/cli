@@ -15,9 +15,13 @@
     
       echo '<div id="item" style="border: thin solid blue; padding:10px; margin:10px">';
       
+	echo '<a href="article.php?abas_nr='.$item['nummer'].'">';
 	echo '<span style="color:blue;padding:5px;">'.$item['nummer'].'</span>';
+	echo '</a>';
+	
 	echo '<span style="color:grey">'.$item['such'].'</span> <br>';
 	echo '<span style="color:grey;font-size:small;">'.$item['name'].'</span><br>';
+
       /*
       foreach ($item as $key=>$value){
 	echo $key.' '.$value.'<br>';
