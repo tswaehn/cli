@@ -4,7 +4,7 @@
 
 <?php 
     
-    //include('lib.php');
+    include('lib.php');
     
     include('../cli/dbConnection.php');
     include('./article/dbArticle.php');

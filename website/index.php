@@ -3,7 +3,8 @@
 <link rel="stylesheet" type="text/css" href="format.css">
 
 <?php 
-
+    
+    include('lib.php');
     include('../cli/dbConnection.php');
   
     $title = "Suchen";

@@ -1,7 +1,8 @@
 <pre>
 
 <?php
-
+  
+  include('lib.php');
   include('../cli/dbConnection.php');
   include('./article/dbArticle.php');
 

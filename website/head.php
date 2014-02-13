@@ -4,8 +4,8 @@
 </div>
 
 <div id="nav">
-  <a href="index.php" target="index">Suchen<a>
-  <a href="article.php" target="_blank">Artikel<a>
-  <a href="raw.php" target="raw">raw<a>
+  <a href="index.php" >Suchen<a>
+  <a href="article.php" >Artikel<a>
+  <a href="raw.php">raw<a>
 </div>
 
