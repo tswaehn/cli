@@ -61,7 +61,7 @@
     $search = "*";
   
     $filename='./data/edp-'.$table.'.dat';
-    $filename = preg_replace("/[^A-Za-z0-9\.]/", '', $filename);    
+    $filename = preg_replace("/[^A-Za-z0-9\.\/]/", '', $filename);    
 
     lg("using file ".$filename );
     
@@ -80,7 +80,7 @@
   function getEDPFieldNames( $table ){
   
     $filename='./data/edp-fields-'.$table.'.dat';
-    $filename = preg_replace("/[^A-Za-z0-9\.]/", '', $filename);
+    $filename = preg_replace("/[^A-Za-z0-9\.\/]/", '', $filename);
 
     lg("using file ".$filename );
     
@@ -125,7 +125,7 @@
   function getEDPData( $table, $search ){
 
     $filename='./data/edp-data-'.$table.'-'.$search.'.dat';
-    $filename = preg_replace("/[^A-Za-z0-9\.]/", '', $filename);
+    $filename = preg_replace("/[^A-Za-z0-9\.\/]/", '', $filename);
 
     lg("using file ".$filename );
     
