@@ -220,23 +220,13 @@
   function importTable( $table, $search, $mode ){
     
     // array with 
-    $data = getData( $table, $search );
+    $data = getEDPData( $table, $search );
     
     //renderData( $data );
     
-    $f=$data['fields'];
+    $fields=$data['fields'];
     $lines=$data['lines'];
 
-    $fields=array();
-    for ($i=0;$i<70;$i++){
-      if ($i==58){
-	//continue;
-      }
-      $fields[]=$f[$i];
-    }
-
-    $fields = $f;
-    
     prepareTable( $table, $fields, $mode );
   
     insertIntoTable( $table, $fields, $lines );

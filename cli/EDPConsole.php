@@ -55,13 +55,15 @@
   }
   
   
-  function getTables(){
+  function getEDPTables(){
   
     $table = "tables";
     $search = "*";
   
-    $filename='edp-'.$table.'.dat';
-    $filename = preg_replace( '/:/','-',$filename);      
+    $filename='./data/edp-'.$table.'.dat';
+    $filename = preg_replace("/[^A-Za-z0-9\.]/", '', $filename);    
+
+    lg("using file ".$filename );
     
     if (_REAL_EDP_ == 1){    
       $lines = shell_exec( 'EDPConsole '.$table.' '.$search );
@@ -75,11 +77,13 @@
     
   }
   
-  function getFieldNames( $table ){
+  function getEDPFieldNames( $table ){
   
-    $filename='edp-fieldnames-'.$table.'.dat';
-    $filename = preg_replace( '/:/','-',$filename);
- 
+    $filename='./data/edp-fields-'.$table.'.dat';
+    $filename = preg_replace("/[^A-Za-z0-9\.]/", '', $filename);
+
+    lg("using file ".$filename );
+    
     $par1 = "fieldnames";
     $par2 = $table;
     if (_REAL_EDP_ == 1){    
@@ -109,11 +113,22 @@
   }
   
 
-  function getData( $table, $search ){
+  /*
+      \return: big array with array for each entry
+      
+      $data['fields']= array('field1', 'field2', ... );
+      $data['lines']= array(
+			array( 'some', 'data', 'here' );
+			array( 'some', 'other', 'data' );
+		      )
+  */
+  function getEDPData( $table, $search ){
 
-    $filename='edp-input-'.$table.'.dat';
-    $filename = preg_replace( '/:/','-',$filename);
+    $filename='./data/edp-data-'.$table.'-'.$search.'.dat';
+    $filename = preg_replace("/[^A-Za-z0-9\.]/", '', $filename);
 
+    lg("using file ".$filename );
+    
     if (_REAL_EDP_ == 1){
       lg( "table: ".$table );
       lg( "search: ".$search );
