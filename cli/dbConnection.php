@@ -5,8 +5,6 @@
   define('_FIELD_PREFIX_', 'a_' );
   
   include( 'config.txt');
-  include( 'lib.php' );
-  include( 'EDPConsole.php');
 
   function connectToDb(){
     global $dbname,$user,$pass,$pdo;

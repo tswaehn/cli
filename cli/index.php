@@ -1,7 +1,9 @@
 <?php
 
-  include('dbConnection.php');
-  
+  include( 'lib.php' );
+  include( 'EDPDefinition.php');
+  include( 'EDPConsole.php');
+  include( 'dbConnection.php');
 
   echo "<pre>";
   lg( "start" );
