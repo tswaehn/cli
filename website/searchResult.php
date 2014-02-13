@@ -17,7 +17,7 @@
       
 	echo '<span style="color:blue;padding:5px;">'.$item['nummer'].'</span>';
 	echo '<span style="color:grey">'.$item['such'].'</span> <br>';
-	echo '<span style="color:grey;font-size:small;">'.$item['name'].'</span>';
+	echo '<span style="color:grey;font-size:small;">'.$item['name'].'</span><br>';
       /*
       foreach ($item as $key=>$value){
 	echo $key.' '.$value.'<br>';

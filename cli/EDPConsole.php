@@ -87,16 +87,16 @@
     $par1 = "fieldnames";
     $par2 = $table;
     if (_REAL_EDP_ == 1){    
-      $line = shell_exec( 'EDPConsole '.$par1.' '.$par2 );
+      $contents = shell_exec( 'EDPConsole '.$par1.' '.$par2 );
       
-      file_put_contents( $filename, $lines );
+      file_put_contents( $filename, $contents );
     } else {
       
-      $line = file_get_contents( $filename );
+      $contents = file_get_contents( $filename );
     
     }
     
-    $data = stringsToArray( $line );
+    $data = stringsToArray( $contents );
     $lines = $data['lines'];
     $fieldnames = array();
     $fieldnames_str='';

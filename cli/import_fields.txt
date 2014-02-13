@@ -1,3 +1,55 @@
 
 Teil:Artikel
 nummer,name,such,sucherw,erfass,stand,ebez,bsart,ynlief,zuplatz,abplatz,ypdf1,ydxf,yxls,ytpdf,ytlink,bild,bbesch,foto,fotoz,catpics,catpicsz,catpicl,catpiclz,caturl,zn,tabnr,anzahl,elanzahl,elart,elarta,elem,elex
+
+ggf. das mal prüfen
+    [ykahk] =>       0.0000
+
+    [645] =>       0.0000
+
+    [yhek] =>      24.9116
+
+    [646] =>      24.9116
+
+    [ystand] => 10.12.2013
+
+    [647] => 10.12.2013
+
+    [ykzeit] => 16:37
+
+    [648] => 16:37
+
+    [ykblatt] => 38877
+
+    [649] => 38877
+
+    [ykmge] => 
+    
+    
+bzw.
+
+    [zeichn] => 058.01-7000.730-00
+
+    [103] => 058.01-7000.730-00
+
+    [abtlg] =>
+
+    [104] =>
+
+    [lgruppe] =>
+
+    [105] =>
+
+    [lief] =>    30070
+
+    [106] =>    30070
+
+    [ylief1sw] => HSEB-INT
+
+    [107] => HSEB-INT
+
+    [lief2] =>
+
+    [108] => 
+    
+    

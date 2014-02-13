@@ -13,7 +13,7 @@
       // any occurring errors wil be thrown as PDOException
       //PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,
       // an SQL command to execute when connecting
-      PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"
+      //PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"
     );
     
     $pdo = new PDO('mysql:host=localhost;dbname='.$dbname, $user, $pass, $opt);  
@@ -172,7 +172,8 @@
       }
     }
 
-    $sql .= ');';
+    //$sql .= ' );';
+    $sql .= ') GROUP BY ( `nummer` );';
     
     try {
 	lg($sql);
