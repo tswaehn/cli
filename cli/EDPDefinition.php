@@ -48,7 +48,7 @@
   function getEDPDefinition(){
       $import = array(
       
-	    $teil_artikel;
+	    $teil_artikel
   
 	  );
 	  
