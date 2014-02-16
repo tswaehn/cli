@@ -7,6 +7,9 @@
     include('lib.php');
     
     include('../cli/dbConnection.php');
+    
+    include('./article/articleHelpers.php');
+    include('./article/renderMedia.php');
     include('./article/dbArticle.php');
     
     
