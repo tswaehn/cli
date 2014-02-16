@@ -4,9 +4,7 @@
 		  "bbesh", "foto", "fotoz", "catpics", "catpicsz", 
 		  "catpicl", "catpiclz", "caturl" );
 
-  $mediaIgnore = array("W:\DXF\\", "W:\Bilder\\", "WWW.", "W:\\", "" );
-  
-  print_r( $mediaIgnore );
+  $mediaIgnore = array("W:\DXF\\", "W:\Bilder\\", "W:\PDF\\", "WWW.", "W:\\", "" );
   
   function filterValidMedia( $article ){
   
@@ -36,6 +34,19 @@
     return $media;
   }
   
+  function renderMediaFile( $file ){
+    $name = basename( $file );
+    //$dir = dirname( $file );
+    
+    disp('<a href="./article/download.php?file='.$file.'">'.$name.'</a>');
+  
+  }
+  
+  function renderMediaDir( $dir ){
+  
+  }
+  
+  
   function renderMedia( $article ){
     div("media");
     
@@ -44,7 +55,15 @@
     $media = filterValidMedia( $article );
     
     foreach ($media as $item){
-      disp('<a href="./article/download.php?file='.$item.'">'.$item.'</a>');
+      if (is_file( $item )){
+	renderMediaFile( $item );
+      } else if (is_dir( $item )){
+	renderMediaDir( $item );
+      } else {
+	disp("non-existent media ".$item );
+	renderMediaFile( $item );
+      }
+      
     }
     
     /*
