@@ -8,8 +8,7 @@
   
   function renderInfo( $article ){
     div("artikel");
-    disp( $article["nummer"] );
-    disp( $article["such"] );
+    disp( '<span style="color:blue;padding:5px;font-size:medium">'.$article["nummer"].'</span>'.'<span>'.$article["such"].'</span>' );
     disp( $article["sucherw"] );
     disp( "Erstellt ".$article["erfass"] );
     disp( "Änderung ".$article["stand"] );
