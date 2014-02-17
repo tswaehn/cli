@@ -14,18 +14,21 @@
     $media = array();
     
     foreach ($mediaFields as $field ){
-      if (isset( $article[$field])){
+      $name = $article[$field];
+      if (isset( $name )){
       
 	$ignore=0;
 	foreach ($mediaIgnore as $ignore){
-	  if (strcmp( $article[$field], $ignore ) == 0){
+	  if (strcmp( $name, $ignore ) == 0){
 	    $ignore=1;
 	    break;
 	  }
 	}
 	
 	if ($ignore==0){
-	  $media[] = $article[$field];
+	  // replace mapped drive by unc
+	  $name=str_replace("W:\\", "\\\\HSEB-SV2\\Daten\\", $name);
+	  $media[] = $name;
 	}
 	
       }
@@ -49,11 +52,6 @@
   
   function renderMedia( $article ){
     div("media");
-    $file = "/home/tswaehn/Downloads/161316-da-01-en-IC_AUIPS6041_TO220FL__IR.pdf";
-    
-    renderMediaFile( $file );
-    
-    //disp('<a href="./article/download.php">download</a>');
   
     $media = filterValidMedia( $article );
     
