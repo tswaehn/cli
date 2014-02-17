@@ -49,6 +49,9 @@
   
   function renderMedia( $article ){
     div("media");
+    $file = "/home/tswaehn/Downloads/161316-da-01-en-IC_AUIPS6041_TO220FL__IR.pdf";
+    
+    renderMediaFile( $file );
     
     //disp('<a href="./article/download.php">download</a>');
   
