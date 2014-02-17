@@ -22,8 +22,8 @@
     $tablename = $table->tablename;
     $searches= $table->searches;
 
-    // just load and store field definitions from EDP
-    getEDPFieldNames( $tablename );
+    // load and store field definitions from EDP
+    $fieldinfo = getEDPFieldNames( $tablename );
 
     // execute the search and insert into db
     $first=1;
@@ -34,7 +34,7 @@
       } else {
 	$mode=_UPDATE_;
       }
-      importTable( $tablename, $search, $mode );
+      importTable( $tablename, $fieldinfo, $search, $mode );
     }
 
   }

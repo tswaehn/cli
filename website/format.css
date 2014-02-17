@@ -3,6 +3,14 @@ td {
 
 }
 
+#caption {
+  font-weight:bold;
+  font-size:small;
+  font-variant:small-caps;
+  padding-bottom:2px;
+  margin-bottom:2px;
+}
+
 #head {
   border:thin solid grey;
   background-color: #aaaaaa;
@@ -42,6 +50,21 @@ td {
   padding:20px;
 
 }
+
+/* short article */
+  #abas_nr {
+    color:blue;
+    padding:5px;
+    font-size:medium;
+  }
+
+  #such {
+    font-weight:bold;
+  }
+  
+  #desc {
+    color:gray;
+  }
 
 #artikel {
   padding:5px;

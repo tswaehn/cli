@@ -10,7 +10,7 @@
   }
   
   function lg( $text ){
-    echo "log>".$text."\n";
+    echo "log>".$text."<br>";
   }
 
 
@@ -39,5 +39,12 @@
   if ($search ==''){
     $search ='bnc';
   }
+  
+
+  function in_arrayi($needle, $haystack) {
+      return in_array(strtolower($needle), array_map('strtolower', $haystack));
+  }
+  
+    
 ?> 
  

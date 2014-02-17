@@ -6,9 +6,15 @@
     die();
   }
   
+  function shortArticle( $article ){
+    disp( '<a href="./article.php?abas_nr='.$article["nummer"].'"><span id="abas_nr">'.$article["nummer"].'</span></a>'.'<span id="such">'.$article["such"].'</span>'." ".'<span id="desc">'.$article["name"].'</span>');
+  }
+  
+  
   function renderInfo( $article ){
     div("artikel");
-    disp( '<span style="color:blue;padding:5px;font-size:medium">'.$article["nummer"].'</span>'.'<span>'.$article["such"].'</span>' );
+    shortArticle( $article );
+    //disp( '<span id="abas_nr">'.$article["nummer"].'</span>'.'<span id="such">'.$article["such"].'</span>' );
     disp( $article["sucherw"] );
     disp( "Erstellt ".$article["erfass"] );
     disp( "Änderung ".$article["stand"] );
@@ -21,6 +27,7 @@
   
   function renderBestellung( $article ){
     div("artikel");
+    disp('<span id="caption">Fertigung</span><br>');
     disp( "Einkaufstext ".$article["ebez"] );
     //disp( "Dispositionsart ".$article["dispo"] );
     disp( "Beschaffung ".$article["bsart"] );
@@ -30,12 +37,25 @@
   
   function renderLager( $article ){
     div("artikel");
+    disp('<span id="caption">Lager</span><br>');
     disp( "Eingang ".$article["zuplatz"] );
     disp( "Ausgang ".$article["abplatz"] );
     ediv();
   
   }
 
+  function renderSimilar( $article ){
+    div("artikel");  
+    disp('<span id="caption">Ähnliche Artikel</span><br>');
+    
+    $result = getSimilarItems( $article );
+    
+    foreach ($result as $item ){
+      shortArticle( $item );
+    }
+    
+    ediv();
+  }
   
   function renderFertingsliste($article){
   /*
@@ -49,7 +69,7 @@
     [721] => Arbeitsgang
   */
     div("fertigungsliste");
-    
+    disp('<span id="caption">Fertigungsliste</span><br>');
     $abas_nr = $article["nummer"];
     
     $result = getAllItems( $abas_nr );
@@ -86,10 +106,13 @@
     renderMedia( $article );
   echo "</td><td>";
     renderInfo( $article );
+    renderLager($article );    
+    
+    renderSimilar( $article );
   echo "</td></tr>";
   echo "</table>";
   
-  renderLager($article );
+
   renderFertigung($article);
   renderBestellung($article);
   

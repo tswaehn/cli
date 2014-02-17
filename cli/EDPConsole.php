@@ -1,4 +1,7 @@
 <?php
+  define( "ASCII", 0 );
+  define( "FLOAT", 1 );
+  define( "TIMESTAMP", 2 );
 
   function splitLine( $line ){
     $elements = preg_split( '/#/', $line );
@@ -97,13 +100,26 @@
     }
     
     $data = stringsToArray( $contents );
+    
     $lines = $data['lines'];
     $fieldnames = array();
     $fieldnames_str='';
     foreach ($lines as $line){
       $field = $line[0];
-      $fieldnames[] = $field;
-      $fieldnames_str .= ','.$field;
+      
+      switch ( $line[1] ){
+	case 'A': $type = ASCII; break;
+	case 'N': $type = FLOAT; break;
+	case 'D': $type = TIMESTAMP; break;
+	default:
+	  $type = $line[1] ; 
+	  lg( "unknown type ".$line[1] );
+      }
+      
+      $size = $line[2];
+      
+      $fieldnames[$field] = array( 'type'=>$type, 'size'=>$size );
+      $fieldnames_str .= ','.$line[0];
       
     }
     

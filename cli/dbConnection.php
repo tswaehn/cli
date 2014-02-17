@@ -36,20 +36,35 @@
     return $result !== FALSE;
   }
   
-  function createTable( $table, $fields ){
+  function createTable( $table, $fields, $fieldinfo ){
     global $pdo;
     
     $field_str="";
     $count=count($fields);
     for ($i=0;$i<$count;$i++){
-      $field_str .= " ".q($fields[$i])." TEXT";
+      $field = $fields[$i];
+      
+      $type=$fieldinfo[$field]['type'];
+      $size=$fieldinfo[$field]['size'];
+      
+      $type_str = "";
+      switch ($type){
+	case ASCII: $type_str = "VARCHAR(".$size.")";break;
+	case FLOAT: $type_str = "FLOAT";break;
+	case TIMESTAMP: $type_str = "DATETIME";break;
+	default:
+	  $type_str = "TEXT";
+	  lg( "failed to set type ");
+      }
+      
+      $field_str .= " ".q($field)." ".$type_str;
       if ($i <($count-1)){
 	$field_str.=",";
       }
     }
 
     try {
-	$sql ="CREATE table ".q($table)." (".$field_str.");";
+	$sql ="CREATE table ".q($table)." (".$field_str.") ENGINE=InnoDB;";
 	
 	lg( $sql) ;
 	$q=$pdo->query($sql);
@@ -161,7 +176,7 @@
     
     $columns = getColumns( $table );
     
-    $sql = 'SELECT * FROM `abas-shadow`.'.q($table).' WHERE (';
+    $sql = 'SELECT * FROM '.q($table).' WHERE (';
     
     $first = $columns[0];
     foreach ($columns as $item){
@@ -190,7 +205,7 @@
   
   }
   
-  function prepareTable( $table, $fields, $mode ){
+  function prepareTable( $table, $fields, $fieldinfo, $mode ){
     global $pdo;
     
       
@@ -199,12 +214,12 @@
       
       if ($mode == _CLEAN_){
 	removeTable( $table );
-	createTable( $table, $fields );
+	createTable( $table, $fields, $fieldinfo );
       }
       
     } else {
       lg( "table ".$table." does not exist" );
-      createTable( $table, $fields );
+      createTable( $table, $fields, $fieldinfo );
     }
     
     if ($mode == _UPDATE_ ){
@@ -216,7 +231,7 @@
  
   
   
-  function importTable( $table, $search, $mode ){
+  function importTable( $table, $fieldinfo, $search, $mode ){
     
     // array with 
     $data = getEDPData( $table, $search );
@@ -226,7 +241,7 @@
     $fields=$data['fields'];
     $lines=$data['lines'];
 
-    prepareTable( $table, $fields, $mode );
+    prepareTable( $table, $fields, $fieldinfo, $mode );
   
     insertIntoTable( $table, $fields, $lines );
     
