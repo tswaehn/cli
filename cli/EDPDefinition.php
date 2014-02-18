@@ -39,10 +39,14 @@
 
   // -----------------------------------------------------------------
   //
-  $einkauf_bestellungen = new EDPImport( "Einkauf:Bestellungen" );
+  $einkauf_bestellung = new EDPImport( "Einkauf:Bestellung" );
     
-  $einkauf_bestellungen->addSearch("id=");      
-  
+  $einkauf_bestellung->addSearch("id=");      
+
+  // -----------------------------------------------------------------
+  //
+  $fertigungs_karte = new EDPImporT( "Fertigungsliste:Fertigungsliste" );
+  $fertigungs_karte->addSearch("id=");
   
   // -----------------------------------------------------------------
   //
@@ -54,11 +58,15 @@
   //
   function getEDPDefinition(){
     global $teil_artikel;
+    global $einkauf_bestellung;
+    global $fertigungs_karte;
     
     $import = array(
       
-	    $teil_artikel,
-	    $einkauf_bestellungen
+	    
+	    $fertigungs_karte,
+	    $einkauf_bestellung,
+	    //$teil_artikel
 	  );
 	  
     return $import;
