@@ -2,6 +2,10 @@
 <head>
 <link rel="stylesheet" type="text/css" href="format.css">
 <link rel="stylesheet" type="text/css" href="./article/article.css">
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
 <?php 
     
     include('lib.php');
@@ -11,7 +15,10 @@
     include('./article/articleHelpers.php');
     include('./article/renderMedia.php');
     include('./article/renderLager.php');
+    include('./article/renderFertigung.php');
+    include('./article/renderVerwendung.php');
     include('./article/dbArticle.php');
+    include('./article/dbFertigung.php');
     
     
     $title = "Artikel anzeigen";
@@ -38,5 +45,7 @@
     <?php include('./article/articleView.php'); ?>  
   </div>
   
+  
+  <?php storeAllLog(); ?>
 </html>
  

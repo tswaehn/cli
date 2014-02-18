@@ -14,5 +14,6 @@ id,nummer,such,betreff,art,artex,artikel,tename,ls,re,aumge,planmge,bem,ysenddat
     
 Fertigungsliste:Fertigungsliste
 v1.0
-id,nummer,such,tename,artikel,anzahl,elname,vpos,zid,tabnr
+id,nummer,such,tename,artikel,anzahl,elem,elart,elarta,elname,elle,vpos,zid,tabnr
+
     

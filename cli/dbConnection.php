@@ -18,6 +18,8 @@
     
     $pdo = new PDO('mysql:host=localhost;dbname='.$dbname.';', $user, $pass, $opt);  
     $pdo->exec("set names utf8");
+    
+    lg("--- db connected to ".$dbname." ".date('r'));
   }
   
   function tableExists( $table ){

@@ -1,5 +1,36 @@
 <?php
   
+  $edp_conf = '
+  [Teil:Artikel]
+    fieldlist=nummer,name,such,sucherw,erfass,stand,ebez,bsart,ynlief,zuplatz,abplatz,ypdf1,ydxf,yxls,ytpdf,ytlink,bild,bbesch,foto,fotoz,catpics,catpicsz,catpicl,catpiclz,caturl,zn,tabnr,anzahl,elanzahl,elart,elarta,elem,elex,bestand,lgbestand,zbestand,dbestand,lgdbestand,ve,fve,versionn
+    sortby=nummer
+    maxdatasize=100000
+    byrows=0
+    sortasc=1
+    search-and=1
+
+  [Einkauf:Bestellung]
+    fieldlist=id,nummer,such,betreff,art,artex,artikel,tename,ls,re,aumge,planmge,bem,ysenddat,ysendusr,lief
+    sortby=nummer
+    maxdatasize=100000
+    byrows=1
+    sortasc=1
+    search-and=1
+
+  [Fertigungsliste:Fertigungsliste]
+    fieldlist=id,nummer,artikel,anzahl,elem,elart,elarta,elle,zid,tabnr
+    sortby=nummer
+    maxdatasize=100000
+    byrows=1
+    sortasc=1
+    search-and=1
+
+  ';
+  
+  // create config for EDPConsole
+  $ini_filename = "EDP.ini";
+  file_put_contents( $ini_filename, $edp_conf );
+  
   class EDPImport {
     
     public $tablename;
@@ -40,13 +71,12 @@
   // -----------------------------------------------------------------
   //
   $einkauf_bestellung = new EDPImport( "Einkauf:Bestellung" );
-    
   $einkauf_bestellung->addSearch("id=");      
 
   // -----------------------------------------------------------------
   //
-  $fertigungs_karte = new EDPImporT( "Fertigungsliste:Fertigungsliste" );
-  $fertigungs_karte->addSearch("id=");
+  $fertigungs_liste = new EDPImport( "Fertigungsliste:Fertigungsliste" );
+  $fertigungs_liste->addSearch("id=;flistestd=ja");
   
   // -----------------------------------------------------------------
   //
@@ -59,14 +89,14 @@
   function getEDPDefinition(){
     global $teil_artikel;
     global $einkauf_bestellung;
-    global $fertigungs_karte;
+    global $fertigungs_liste;
     
     $import = array(
       
+	    $teil_artikel,
+	    $fertigungs_liste,
+	    $einkauf_bestellung
 	    
-	    $fertigungs_karte,
-	    $einkauf_bestellung,
-	    //$teil_artikel
 	  );
 	  
     return $import;

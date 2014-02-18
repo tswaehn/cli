@@ -3,6 +3,10 @@
 <link rel="stylesheet" type="text/css" href="format.css">
 <link rel="stylesheet" type="text/css" href="./article/article.css">
 
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+
 <?php 
     
     include('lib.php');
@@ -29,5 +33,7 @@
   <div id="searchresult">
     <?php include('./searchResult.php'); ?>  
   </div>
+
+  <?php storeAllLog(); ?>
   
 </html>
