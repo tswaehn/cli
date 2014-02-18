@@ -53,7 +53,8 @@
   // -----------------------------------------------------------------
   //
   $teil_artikel = new EDPImport( "Teil:Artikel" );
-    
+  
+  $teil_artikel->addSearch("nummer=0!0000-00000");    
   $teil_artikel->addSearch("nummer=0000-00000!1999-99999");  
   $teil_artikel->addSearch( "nummer=2000-00000!2199-99999" );  
   $teil_artikel->addSearch( "nummer=2200-00000!2399-99999" );  
