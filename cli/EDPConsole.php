@@ -15,6 +15,10 @@
     $isFirst=1;
     $data=array( 'fields'=> array(), 'lines'=>array() );
     //$contents=preg_replace("/[^A-Za-z0-9\n#,>\-\ \ö\ä\ü\Ö\Ä\Ü\ß]/", '', $contents);
+    
+    // remove white spaces
+    $contents= preg_replace( array('/#\s+/','/\s+#/'), '#', $contents);
+    
     //print_r($contents);
     foreach(preg_split("/((\r?\n)|(\r\n?))/", $contents) as $line){
 

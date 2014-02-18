@@ -16,8 +16,8 @@
       //PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"
     );
     
-    $pdo = new PDO('mysql:host=localhost;dbname='.$dbname, $user, $pass, $opt);  
-    
+    $pdo = new PDO('mysql:host=localhost;dbname='.$dbname.';', $user, $pass, $opt);  
+    $pdo->exec("set names utf8");
   }
   
   function tableExists( $table ){
@@ -192,13 +192,17 @@
     
     try {
 	lg($sql);
+	$starttime = microtime(true); 
 	$result = $pdo->query( $sql);
+	$endtime = microtime(true); 
+	$timediff = $endtime-$starttime;
     } catch (Exception $e) {
 	lg("search failed");
 	return;
     } 
     
-    print_r( $result);
+    lg('exec time is '.($timediff) );
+
     lg('found '.$result->rowCount().' items' );
     
     return $result;

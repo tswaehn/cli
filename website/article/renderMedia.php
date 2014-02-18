@@ -142,14 +142,35 @@
       $file_link="./article/image_placeholder.png";
       echo ('<img src="'.$file_link.'" width="'.$max_width.'" >');
     }
-  
+    echo "<br>";
   }
+  
+  /*
+    convert pdf to jpeg with imagemagic
+	  
+      $fp_pdf = fopen($pdf, 'rb');
+
+      $img = new imagick(); // [0] can be used to set page number
+      $img->setResolution(300,300);
+      $img->readImageFile($fp_pdf);
+      $img->setImageFormat( "jpg" );
+      $img->setImageCompression(imagick::COMPRESSION_JPEG); 
+      $img->setImageCompressionQuality(90); 
+
+      $img->setImageUnits(imagick::RESOLUTION_PIXELSPERINCH);
+
+      $data = $img->getImageBlob(); 
+
+  
+  */
   
   function renderMedia( $article ){
     div("media");
   
     $media = filterValidMedia( $article );
-
+    
+    //disp( '<a href="./article/pdfToJpeg.php?file=test.pdf">download</a>' );
+    
     // add test folder
     //$media[] = "/home/tswaehn/public_html/git_dev/abas";
     

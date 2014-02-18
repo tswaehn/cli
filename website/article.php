@@ -1,7 +1,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="format.css">
-
+<link rel="stylesheet" type="text/css" href="./article/article.css">
 <?php 
     
     include('lib.php');
@@ -10,6 +10,7 @@
     
     include('./article/articleHelpers.php');
     include('./article/renderMedia.php');
+    include('./article/renderLager.php');
     include('./article/dbArticle.php');
     
     

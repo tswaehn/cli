@@ -1,13 +1,17 @@
 <?php
 
-
-  
+   
   if ($abas_nr == ""){
     die();
   }
   
   function shortArticle( $article ){
-    disp( '<a href="./article.php?abas_nr='.$article["nummer"].'"><span id="abas_nr">'.$article["nummer"].'</span></a>'.'<span id="such">'.$article["such"].'</span>'." ".'<span id="desc">'.$article["name"].'</span>');
+    $text = '<span id="abas_nr"><a href="./article.php?abas_nr='.$article["nummer"].'">'.$article["nummer"].'</a></span>';
+    $text .= ' <span id="such">'.$article["such"].'</span>';
+    $text .= ' <span id="desc">'.$article["name"].'</span>';
+    $text .= ' <br><span >'.renderBestand( $article ) .'</span>';
+    $text .= '<br>';
+    disp( $text );
   }
   
   
@@ -15,9 +19,11 @@
     div("artikel");
     shortArticle( $article );
     //disp( '<span id="abas_nr">'.$article["nummer"].'</span>'.'<span id="such">'.$article["such"].'</span>' );
-    disp( $article["sucherw"] );
+    //disp( $article["sucherw"] );
+    disp();
     disp( "Erstellt ".$article["erfass"] );
     disp( "Änderung ".$article["stand"] );
+    disp( "Version ".$article["versionn"] );
     ediv();
   }
   
@@ -34,15 +40,7 @@
     disp( "Lieferant ".$article["ynlief"] );
     ediv();
   }
-  
-  function renderLager( $article ){
-    div("artikel");
-    disp('<span id="caption">Lager</span><br>');
-    disp( "Eingang ".$article["zuplatz"] );
-    disp( "Ausgang ".$article["abplatz"] );
-    ediv();
-  
-  }
+
 
   function renderSimilar( $article ){
     div("artikel");  
@@ -93,6 +91,42 @@
     ediv();
   }
   
+  function renderVerwendungen( $article ){
+    div("artikel");
+    disp('<span id="caption">Verwendung</span><br>');
+    
+    $result = getAllParents( $article );
+    
+    function renderSingle( $array, $line, &$dd ){
+      
+      $such = "";
+      if (isset($array["such"])){
+	$such = $array["such"];
+      }
+      
+
+      
+      foreach ($array as $key=>$item){
+	if ($key == "such"){
+	  //$such = $item;
+	  $continue;
+	} else {
+	  $line = '<div id="x">'. $key." ".$such.$dd.'</div>';
+	  
+	  $dd = '<div id="x">'. $key." ".$such.$dd.'</div>';
+	  renderSingle( $item, $line, $dd );
+	}
+      
+      }
+    }
+    
+    $dd= array();
+      renderSingle( $result, "", $dd );
+    foreach ( $dd as $box ){
+      echo $box."<br>";
+    }
+    ediv();
+  }
 
   connectToDb();
   echo "<pre>";
@@ -112,6 +146,7 @@
   echo "</td></tr>";
   echo "</table>";
   
+  //renderVerwendungen($article );
 
   renderFertigung($article);
   renderBestellung($article);

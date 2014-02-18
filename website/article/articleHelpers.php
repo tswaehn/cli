@@ -1,6 +1,6 @@
 <?php
 
-  function disp( $text ){
+  function disp( $text = ""){
     
     echo $text."<br>";
     

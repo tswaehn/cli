@@ -36,6 +36,13 @@
   $teil_artikel->addSearch( "nummer=7000-00000!7999-99999" );  
   $teil_artikel->addSearch( "nummer=8000-00000!8999-99999" );  
   $teil_artikel->addSearch( "nummer=9000-00000!9999-99999" );  
+
+  // -----------------------------------------------------------------
+  //
+  $einkauf_bestellungen = new EDPImport( "Einkauf:Bestellungen" );
+    
+  $einkauf_bestellungen->addSearch("id=");      
+  
   
   // -----------------------------------------------------------------
   //
@@ -50,8 +57,8 @@
     
     $import = array(
       
-	    $teil_artikel
-  
+	    $teil_artikel,
+	    $einkauf_bestellungen
 	  );
 	  
     return $import;

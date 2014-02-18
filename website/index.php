@@ -1,6 +1,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="format.css">
+<link rel="stylesheet" type="text/css" href="./article/article.css">
 
 <?php 
     
