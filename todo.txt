@@ -1,6 +1,8 @@
 
 - EDP import blockiert aktuell an "für" in "name" bzw. "sucher"
 - einfluss von "flistestd" in "Fertigungsliste:Fertigungsliste" unklar
+- "2058-17090" bg-msu hat zwei stücklisten
+
 - import von arbeitsgängen
 - import von interner fertigung aus "Betr-Auftrag:Betriebsaufträge"
 

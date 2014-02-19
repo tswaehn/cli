@@ -139,31 +139,30 @@
       
       echo "<br>";
     } else {
-      $file_link="./article/image_placeholder.png";
-      echo ('<img src="'.$file_link.'" width="'.$max_width.'" >');
+	
+      $found_something_to_display=0;
+      // check for an pdf to display
+      foreach ($media as $item){
+	$info = pathinfo($item, PATHINFO_EXTENSION);
+	if (in_arrayi( $info, array("pdf"))){
+	  echo "converting pdf2jpg";
+	  $found_something_to_display=1;
+	  $file_link='./article/pdfToJpeg.php?file='.$item;
+	  echo ('<a href="'.$file_link.'"><img src="'.$file_link.'" width="'.$max_width.'"  ></a>');
+	  break;
+	}	
+      }
+      
+      if ($found_something_to_display==0){
+	$file_link="./article/image_placeholder.png";
+	//$file_link="./article/download.php?file=/home/tswaehn/public_html/git_dev/abas/website/article/image_placeholder.png";
+	echo ('<img src="'.$file_link.'" width="'.$max_width.'" >');
+      }
     }
     echo "<br>";
   }
   
-  /*
-    convert pdf to jpeg with imagemagic
-	  
-      $fp_pdf = fopen($pdf, 'rb');
-
-      $img = new imagick(); // [0] can be used to set page number
-      $img->setResolution(300,300);
-      $img->readImageFile($fp_pdf);
-      $img->setImageFormat( "jpg" );
-      $img->setImageCompression(imagick::COMPRESSION_JPEG); 
-      $img->setImageCompressionQuality(90); 
-
-      $img->setImageUnits(imagick::RESOLUTION_PIXELSPERINCH);
-
-      $data = $img->getImageBlob(); 
-
-  
-  */
-  
+ 
   function renderMedia( $article ){
     div("media");
   
@@ -172,7 +171,7 @@
     //disp( '<a href="./article/pdfToJpeg.php?file=test.pdf">download</a>' );
     
     // add test folder
-    //$media[] = "/home/tswaehn/public_html/git_dev/abas";
+    //$media[] = "/home/tswaehn/public_html/git_dev/abas/website/";
     
     // find a thumbnail for display
     renderThumbnail( $media );

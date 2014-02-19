@@ -7,6 +7,7 @@
     $filename = $url_file;
     
     if(file_exists($filename)) {
+  
 	header('Content-Description: File Transfer');
 	header('Content-Type: application/octet-stream');
 	header('Content-Disposition: attachment; filename='.basename($filename));
@@ -15,11 +16,14 @@
 	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 	header('Pragma: public');
 	header('Content-Length: ' . filesize($filename));
-	ob_clean();
+
+	if (ob_get_length()){
+		ob_clean();
+	}
 	flush();
 	readfile($filename);
 	exit;
-      
+
     } else {
       die( "file does not exist" );
     }
