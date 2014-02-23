@@ -25,7 +25,8 @@
     $result = getSimilarItems( $article );
     
     foreach ($result as $item ){
-      shortArticle( $item );
+    
+      disp( shortArticle( $item ) );
     }
     
     ediv();

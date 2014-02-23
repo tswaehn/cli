@@ -7,13 +7,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
 
-<?php 
-    
-    include('lib.php');
-    include('../cli/dbConnection.php');
-  
-    $title = "Suchen";
-    ?>
+<?php include('./lib/main.php'); ?>
 
 <title>
 ..::Glaskugel::..
@@ -22,18 +16,18 @@
 
   <div id="head">
     
-    <?php include('./head.php'); ?>
+    <?php include('./lib/head.php'); ?>
     
   </div>
   
-  <div id="searchform">
-    <?php include('./searchForm.php'); ?>    
+  <div id="main">
+    
+    <?php include( $script ) ?>
+    
   </div>
   
-  <div id="searchresult">
-    <?php include('./searchResult.php'); ?>  
-  </div>
-
-  <?php storeAllLog(); ?>
+ 
   
+  <?php finish(); ?>
+ 
 </html>

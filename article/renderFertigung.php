@@ -57,7 +57,20 @@
     disp('<span id="caption">Fertigungsliste (Stammdaten)</span><br>');
     $abas_nr = $article["nummer"];
     
+    echo '<div id="fertigungsliste-ajax"></div>';
+    
+    $updateUrl = "ajax.php?action=fertigungsliste&abas_nr=".$article["nummer"];
+    $tag="fertigungsliste-ajax";
+    insertUpdateScript( $updateUrl, $tag, $cyclic = 0 );
 
+    ediv();
+  }  
+  
+  
+  function ajaxRenderFertingsliste(){ 
+    
+    $abas_nr = getUrlParam("abas_nr");
+ 
     $result = getFertigungsliste( $abas_nr );
     disp( "");
     
@@ -71,7 +84,7 @@
       //disp( $item["zn"]." ".$item["tabnr"]." ".$item["anzahl"]." ".$item["elanzahl"]." ".$item["elart"]." ".$item["elarta"]." ".$item["elem"]." ".$item["elex"] );
       echo "<tr>";
       echo "<td>".$part["tabnr"]."</td>";
-      echo '<td><a href="article.php?abas_nr='.$part["elem"].'">'.$part["elem"]."</td>";
+      echo '<td><a href="?action=article&abas_nr='.$part["elem"].'">'.$part["elem"]."</td>";
       echo "<td>".$part["elarta"]."</td>";
       echo "<td>".$part_info["such"]."</td>";    
       echo "<td>".$part["anzahl"]."</td>";
@@ -79,9 +92,9 @@
       
       echo "</tr>";
     }
-    disp( "</table>" );
-    
-    ediv();
-  }  
+    disp( "</table>" ); 
+  
+  
+  }
 
 ?>

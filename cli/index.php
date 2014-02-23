@@ -2,7 +2,6 @@
 
   date_default_timezone_set('Europe/Berlin');
 
-  include( 'lib.php' );
   include( 'EDPDefinition.php');
   include( 'EDPConsole.php');
   include( 'dbConnection.php');

@@ -6,6 +6,10 @@
   
   include( 'config.txt');
 
+  function q($text){
+    return "`".$text."`";
+  }
+
   function connectToDb(){
     global $dbname,$user,$pass,$pdo;
     

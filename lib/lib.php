@@ -6,13 +6,10 @@
 
   $logging = "";
   
-  function q($text){
-    return "`".$text."`";
-  }
-  
   function lg( $text ){
     global $logging;
     $text .= "\n";
+    //echo $text;
     $logging .= $text;
   }
   
@@ -42,14 +39,6 @@
     $ret = getGlobal( $urlParam );
     return $ret;
   }
-
-  
-  $search = getUrlParam('search');
-  
-  if ($search ==''){
-    $search ='bnc';
-  }
-  
 
   function in_arrayi($needle, $haystack) {
       return in_array(strtolower($needle), array_map('strtolower', $haystack));
