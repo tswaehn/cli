@@ -66,7 +66,7 @@
     }
 
     try {
-	$sql ="CREATE table ".q($table)." (".$field_str.") ENGINE=InnoDB;";
+	$sql ="CREATE table ".q($table)." (".$field_str.") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 	
 	lg( $sql) ;
 	$q=$pdo->query($sql);

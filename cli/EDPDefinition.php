@@ -78,6 +78,11 @@
   //
   $fertigungs_liste = new EDPImport( "Fertigungsliste:Fertigungsliste" );
   $fertigungs_liste->addSearch("id=;flistestd=ja");
+
+  // -----------------------------------------------------------------
+  //
+  $betr_auftraege = new EDPImport( "Betr-Auftrag:Betriebsaufträge" );
+  $betr_auftraege->addSearch("id=");
   
   // -----------------------------------------------------------------
   //
@@ -91,9 +96,11 @@
     global $teil_artikel;
     global $einkauf_bestellung;
     global $fertigungs_liste;
+    global $betr_auftraege;
     
     $import = array(
       
+	    $betr_auftraege,
 	    $teil_artikel,
 	    $fertigungs_liste,
 	    $einkauf_bestellung

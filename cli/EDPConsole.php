@@ -15,7 +15,7 @@
     $isFirst=1;
     $data=array( 'fields'=> array(), 'lines'=>array() );
     //$contents=preg_replace("/[^A-Za-z0-9\n#,>\-\ \ö\ä\ü\Ö\Ä\Ü\ß]/", '', $contents);
-    
+   
     // remove white spaces
     $contents= preg_replace( array('/#\s+/','/\s+#/'), '#', $contents);
     
@@ -150,15 +150,20 @@
     lg("using file ".$filename );
     
     if (_REAL_EDP_ == 1){
+      $table = utf8_encode( $table );
+      $search = utf8_encode( $search );
+
       lg( "table: ".$table );
       lg( "search: ".$search );
       $contents = shell_exec( 'EDPConsole '.$table.' '.$search );
+      $contents = utf8_encode( $contents );      
       
       file_put_contents( $filename, $contents );
       
     } else {
       lg("EDPConsole - simulate" );
       $contents = file_get_contents( $filename );
+      $contents = utf8_encode( $contents );            
     }
     
     $data = stringsToArray( $contents );

@@ -1,5 +1,7 @@
 <?php
 
+  date_default_timezone_set('Europe/Berlin');
+
   include( 'lib.php' );
   include( 'EDPDefinition.php');
   include( 'EDPConsole.php');
@@ -8,7 +10,7 @@
   echo "<pre>";
   lg( "start" );
   
-    
+  
   connectToDb();
   
   // load complete table info from EDP

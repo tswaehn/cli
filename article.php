@@ -17,6 +17,7 @@
     include('./article/renderLager.php');
     include('./article/renderFertigung.php');
     include('./article/renderVerwendung.php');
+    include('./article/renderArticle.php');    
     include('./article/dbArticle.php');
     include('./article/dbFertigung.php');
     

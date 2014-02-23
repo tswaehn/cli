@@ -1,23 +1,11 @@
 <?php
 
    
-  if ($abas_nr == ""){
-    die();
-  }
-  
-  function shortArticle( $article ){
-    $text = '<span id="abas_nr"><a href="./article.php?abas_nr='.$article["nummer"].'">'.$article["nummer"].'</a></span>';
-    $text .= ' <span id="such">'.$article["such"].'</span>';
-    $text .= ' <span id="desc">'.$article["name"].'</span>';
-    $text .= ' <br><span >'.renderBestand( $article ) .'</span>';
-    $text .= '<br>';
-    disp( $text );
-  }
-  
-  
+
+
   function renderInfo( $article ){
     div("artikel");
-    shortArticle( $article );
+    disp( shortArticle( $article ));
     //disp( '<span id="abas_nr">'.$article["nummer"].'</span>'.'<span id="such">'.$article["such"].'</span>' );
     //disp( $article["sucherw"] );
     disp();
@@ -44,7 +32,10 @@
   }
   
 
-  
+  if ($abas_nr == ""){
+    die();
+  }
+   
 
   connectToDb();
   echo "<pre>";
