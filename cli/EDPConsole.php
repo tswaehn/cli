@@ -61,48 +61,61 @@
     
   }
   
+  function executeEDP( $cmdLine ){
+	
+	$filename='./data/edp-'.preg_replace("/[^A-Za-z0-9\ ]/", "-",$cmdLine).'.dat';
+    $filename = preg_replace("/[^A-Za-z0-9\.\/\-]/", " ", $filename);
+
+    lg("using file ".$filename );
+    
+    if (_REAL_EDP_ == 1){
+      //$table = utf8_encode( $table );
+      //$search = utf8_encode( $search );
+	  lg( "exec :".$cmdLine);
+	  
+	  // table and search are given in UTF8 
+	  shell_exec( "echo ".$cmdLine." > cmd_line.txt ");
+	  
+	  // the external programm has to convert from UTF8 to ANSI
+      $contents = shell_exec( $cmdLine );
+	  
+	  // the return needs to be converted into UTF8
+      $contents = utf8_encode( $contents );      
+      
+      file_put_contents( $filename, $contents );
+      
+    } else {
+      lg("EDPConsole - simulate" );
+      $contents = file_get_contents( $filename );
+      $contents = utf8_encode( $contents );            
+    }
+    
+    
+    return $contents;  	
+   
+  
+  }
   
   function getEDPTables(){
   
     $table = "tables";
     $search = "*";
-  
-    $filename='./data/edp-'.$table.'.dat';
-    $filename = preg_replace("/[^A-Za-z0-9\.\/]/", '', $filename);    
-
-    lg("using file ".$filename );
-    
-    if (_REAL_EDP_ == 1){    
-      $lines = shell_exec( 'EDPConsole '.$table.' '.$search );
-      
-      file_put_contents( $filename, $lines );
-    } else {
-    
-      $line = file_get_contents( $filename );
-      
-    }
+	
+	$cmdLine = 'EDPConsole '.$table.' '.$search;
+	
+	executeEDP( $cmdLine );
     
   }
   
   function getEDPFieldNames( $table ){
-  
-    $filename='./data/edp-fields-'.$table.'.dat';
-    $filename = preg_replace("/[^A-Za-z0-9\.\/]/", '', $filename);
 
-    lg("using file ".$filename );
-    
     $par1 = "fieldnames";
     $par2 = $table;
-    if (_REAL_EDP_ == 1){    
-      $contents = shell_exec( 'EDPConsole '.$par1.' '.$par2 );
-      
-      file_put_contents( $filename, $contents );
-    } else {
-      
-      $contents = file_get_contents( $filename );
-    
-    }
-    
+	
+	$cmdLine = 'EDPConsole '.$par1.' '.$par2 ; 
+	
+	$contents= executeEDP( $cmdLine );
+	
     $data = stringsToArray( $contents );
     
     $lines = $data['lines'];
@@ -144,28 +157,13 @@
   */
   function getEDPData( $table, $search ){
 
-    $filename='./data/edp-data-'.$table.'-'.$search.'.dat';
-    $filename = preg_replace("/[^A-Za-z0-9\.\/]/", '', $filename);
+	lg( "table: ".$table );
+	lg( "search: ".$search );
 
-    lg("using file ".$filename );
-    
-    if (_REAL_EDP_ == 1){
-      $table = utf8_encode( $table );
-      $search = utf8_encode( $search );
+	$cmdLine = 'EDPConsole.exe '.$table.' '.$search;
 
-      lg( "table: ".$table );
-      lg( "search: ".$search );
-      $contents = shell_exec( 'EDPConsole '.$table.' '.$search );
-      $contents = utf8_encode( $contents );      
-      
-      file_put_contents( $filename, $contents );
-      
-    } else {
-      lg("EDPConsole - simulate" );
-      $contents = file_get_contents( $filename );
-      $contents = utf8_encode( $contents );            
-    }
-    
+	$contents=executeEDP( $cmdLine);
+	  
     $data = stringsToArray( $contents );
     return $data;  	
   
