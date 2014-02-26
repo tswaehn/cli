@@ -161,12 +161,12 @@ search-and=1
 	    $fertigungs_liste,
 		$teil_zug_abg,
 		$teil_fertigungsmittel,
-		$arbeitsgang
+		$arbeitsgang,
 
 	    $betr_auftraege,
-	    $einkauf_bestellung
+	    $einkauf_bestellung,
 
-		$inventur,
+		$inventur
 	    
 	  );
 	  /*
