@@ -1,34 +1,65 @@
 <?php
   
+  // note: this is UTF-8
   $edp_conf = '
-  [Teil:Artikel]
-    fieldlist=nummer,name,such,sucherw,erfass,stand,ebez,bsart,ynlief,zuplatz,abplatz,ypdf1,ydxf,yxls,ytpdf,ytlink,bild,bbesch,foto,fotoz,catpics,catpicsz,catpicl,catpiclz,caturl,zn,tabnr,anzahl,elanzahl,elart,elarta,elem,elex,bestand,lgbestand,zbestand,dbestand,lgdbestand,ve,fve,versionn
-    sortby=nummer
-    maxdatasize=100000
-    byrows=0
-    sortasc=1
-    search-and=1
 
-  [Einkauf:Bestellung]
-    fieldlist=id,nummer,such,betreff,art,artex,artikel,tename,ls,re,aumge,planmge,bem,ysenddat,ysendusr,lief
-    sortby=nummer
-    maxdatasize=100000
-    byrows=1
-    sortasc=1
-    search-and=1
+[Teil:Artikel]
+fieldlist=nummer,name,such,sucherw,erfass,stand,ebez,bsart,ynlief,zuplatz,abplatz,ypdf1,ydxf,yxls,ytpdf,ytlink,bild,bbesch,foto,fotoz,catpics,catpicsz,catpicl,catpiclz,caturl,zn,tabnr,anzahl,elanzahl,elart,elarta,elem,elex,bestand,lgbestand,zbestand,dbestand,lgdbestand,ve,fve,versionn
+sortby=nummer
+maxdatasize=100000
+byrows=0
+sortasc=1
+search-and=1
 
-  [Fertigungsliste:Fertigungsliste]
-    fieldlist=id,nummer,artikel,anzahl,elem,elart,elarta,elle,zid,tabnr
-    sortby=nummer
-    maxdatasize=100000
-    byrows=1
-    sortasc=1
-    search-and=1
+[Teil:Zugänge/Abgänge]
+fieldlist=id,nummer,such
+sortby=nummer
+maxdatasize=100000
+byrows=0
+sortasc=1
+search-and=1
 
-  ';
+[Einkauf:Bestellung]
+fieldlist=id,nummer,such,betreff,art,artex,artikel,tename,ls,re,aumge,planmge,bem,ysenddat,ysendusr,lief
+sortby=nummer
+maxdatasize=100000
+byrows=1
+sortasc=1
+search-and=1
+
+[Fertigungsliste:Fertigungsliste]
+fieldlist=id,nummer,artikel,anzahl,elem,elart,elarta,elle,zid,tabnr
+sortby=nummer
+maxdatasize=100000
+byrows=1
+sortasc=1
+search-and=1
+
+[Betr-Auftrag:Betriebsaufträge]
+fieldlist=id,nummer
+sortby=nummer
+maxdatasize=100000
+byrows=1
+sortasc=1
+search-and=1
+
+
+
+
+[Inventur:Zähllistenkopf]
+fieldlist=id,nummer,such
+sortby=nummer
+maxdatasize=50
+byrows=1
+sortasc=1
+search-and=1
+
+';
   
   // create config for EDPConsole
   $ini_filename = "EDP.ini";
+  // the external program reads the ini-file as ANSI thus convert it into ANSI
+  $edp_conf = iconv( "UTF-8", "Windows-1252", $edp_conf );
   file_put_contents( $ini_filename, $edp_conf );
   
   class EDPImport {
@@ -68,7 +99,19 @@
   $teil_artikel->addSearch( "nummer=7000-00000!7999-99999" );  
   $teil_artikel->addSearch( "nummer=8000-00000!8999-99999" );  
   $teil_artikel->addSearch( "nummer=9000-00000!9999-99999" );  
+ 
+  // -----------------------------------------------------------------
+  //
+  $teil_zug_abg = new EDPImport( "Teil:Zugänge/Abgänge" );
+  
+  $teil_zug_abg->addSearch("nummer=");    
 
+  // -----------------------------------------------------------------
+  //
+  $teil_fertigungsmittel = new EDPImport( "Teil:Fertigungsmittel" );
+  
+  $teil_fertigungsmittel->addSearch("nummer=");    
+ 
   // -----------------------------------------------------------------
   //
   $einkauf_bestellung = new EDPImport( "Einkauf:Bestellung" );
@@ -83,6 +126,16 @@
   //
   $betr_auftraege = new EDPImport( "Betr-Auftrag:Betriebsaufträge" );
   $betr_auftraege->addSearch("id=");
+ 
+  // -----------------------------------------------------------------
+  //
+  $inventur = new EDPImport( "Inventur:Zähllistenkopf" );
+  $inventur->addSearch("id=");
+
+  // -----------------------------------------------------------------
+  //
+  $arbeitsgang = new EDPImport( "Arbeitsgang:Arbeitsgang" );
+  $arbeitsgang->addSearch("id=");
   
   // -----------------------------------------------------------------
   //
@@ -97,17 +150,32 @@
     global $einkauf_bestellung;
     global $fertigungs_liste;
     global $betr_auftraege;
-    
+    global $teil_zug_abg;
+	global $teil_fertigungsmittel;
+	global $inventur;
+	global $arbeitsgang;
+	
     $import = array(
       
-	    $betr_auftraege,
 	    $teil_artikel,
 	    $fertigungs_liste,
+		$teil_zug_abg,
+		$teil_fertigungsmittel,
+		$arbeitsgang
+
+	    $betr_auftraege,
 	    $einkauf_bestellung
+
+		$inventur,
 	    
 	  );
-	  
-    return $import;
+	  /*
+    $import = array(
+		$einkauf_bestellung,
+
+		);
+*/
+	return $import;
   }
 
 
