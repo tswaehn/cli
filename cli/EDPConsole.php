@@ -81,13 +81,16 @@
 	  
 	  // the return needs to be converted into UTF8
       $contents = utf8_encode( $contents );      
-      
+
+      // save the file as UTF8
       file_put_contents( $filename, $contents );
       
     } else {
       lg("EDPConsole - simulate" );
       $contents = file_get_contents( $filename );
-      $contents = utf8_encode( $contents );            
+
+      // the file is coded in UTF8
+      //$contents = utf8_encode( $contents );            
     }
     
     
