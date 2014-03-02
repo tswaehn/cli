@@ -9,7 +9,7 @@
   function lg( $text ){
     global $logging;
     $text .= "\n";
-    //echo $text;
+    echo $text;
     $logging .= $text;
   }
   

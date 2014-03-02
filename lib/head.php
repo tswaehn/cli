@@ -4,10 +4,23 @@
 </div>
 
 <div id="nav">
-  <a href="?action=suchen" >Suchen<a>
-  <a href="?action=article" >Artikel<a>
-  <a href="?action=raw">raw<a>
+  <table width="100%">
+  <colgroup>
+    <col width="1*">
+    <col width="1*">
+  </colgroup>
+  
+  <tr><td>
+  
+    <a href="?action=suchen" >Suchen<a>
+    <a href="?action=article" >Artikel<a>
 
+  </td><td style="text-align:right">
+    <a href="?action=overdrive">..::oVerdRive::..<a>
+    <a href="?action=raw">°°raw°°<a>
+    
+  </td></tr>
+  </table>
 
 </div>
 

@@ -34,6 +34,11 @@
 		$title ="Artikel";
 		$script="./article/view.php";
 		break;
+		
+    case "overdrive":
+		$title="oVerdRive Search";
+		$script="./overdrive/search.php";
+		break;
     default:
 	      $title="Suchen";
 	      $script="./search/search.php";

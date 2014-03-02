@@ -49,7 +49,7 @@
   function mySearchInTable( $table, $search ){
     global $pdo;
     
-    $searches = preg_split( "/( |-)/", $search);
+    $searches = preg_split( "/( )/", $search, -1, PREG_SPLIT_NO_EMPTY );
     //print_r($searches);
     
     $columns = getColumns( $table );

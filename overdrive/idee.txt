@@ -1,0 +1,7 @@
+
+dict_wordlist (bisher dict)
+
+dict_words
+
+
+SELECT *,sum(cnt) AS srank FROM (SELECT * FROM `dict` WHERE (nummer > 5 and nummer < 100)) AS d0 LEFT JOIN dict_rank AS rank ON d0.str=rank.str GROUP BY d0.nummer ORDER BY srank DESC

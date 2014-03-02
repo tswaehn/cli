@@ -4,6 +4,18 @@
   define('_CLEAN_', 'clean' );
   define('_FIELD_PREFIX_', 'a_' );
   
+  // table type defines
+  define( "ASCII", 0 );
+  define( "FLOAT", 1 );
+  define( "TIMESTAMP", 2 );
+  define( "INDEX", 3 );
+  define( "INT", 4 );
+  
+  // table names
+  define( "DB_ARTICLE", "article" );
+  define( "DB_PRODUCTION_LIST", "production_list" );
+  
+  
   include( 'config.txt');
 
   function q($text){
@@ -42,6 +54,41 @@
     return $result !== FALSE;
   }
   
+  function dbExecute( $sql ){
+    global $pdo;
+    
+    if (empty($sql)){
+      return null;
+    }
+    
+    $sql .= ";";
+    lg($sql);   
+    
+    try {
+
+	$starttime = microtime(true); 
+	
+	$result = $pdo->query( $sql);
+	
+	$endtime = microtime(true); 
+	$timediff = $endtime-$starttime;
+	
+	lg('exec time is '.($timediff) );
+	
+    } catch (Exception $e) {
+	lg("exec failed");
+	return;
+    } 
+    
+    if (!empty($result)){
+      lg('found '.$result->rowCount().' rows' );
+    } else {
+      lg('result empty');
+    }
+    
+    return $result;  
+  }
+  
   function createTable( $table, $fields, $fieldinfo ){
     global $pdo;
     
@@ -58,6 +105,9 @@
 	case ASCII: $type_str = "VARCHAR(".$size.")";break;
 	case FLOAT: $type_str = "FLOAT";break;
 	case TIMESTAMP: $type_str = "DATETIME";break;
+	case INDEX: $type_str= "BIGINT(32) NOT NULL AUTO_INCREMENT, PRIMARY KEY ($field)";break;
+	case INT: $type_str= "BIGINT(32)";break;
+	
 	default:
 	  $type_str = "TEXT";
 	  lg( "failed to set type ");
@@ -110,7 +160,7 @@
     $field_str ="";
     $last = end($fields);
     foreach ($fields as $field){
-      $field_str .= $field;
+      $field_str .= "`".$field."`";
       if ($field!=$last){
 	$field_str .=",";
       }
@@ -120,7 +170,7 @@
     $placeholder="";
     $count=count($fields);
     for ($i=0;$i<$count;$i++){
-      $placeholder .= " ?";
+      $placeholder .= "?";
       if ($i < ($count-1)){
 	$placeholder .= ",";
       }
@@ -128,7 +178,7 @@
     
     // query
     try {
-      $sql = "INSERT INTO ".q($table)." VALUES (".$placeholder.")";
+      $sql = "INSERT INTO ".q($table)." (".$field_str.") VALUES (".$placeholder.")";
       //lg($sql);
       
       $q = $pdo->prepare($sql);
@@ -150,10 +200,37 @@
       return;
     }
     
-    lg( "insert into tables complete" );
+    //lg( "insert into tables complete" );
   
   }
+  
+  function getLastInsertIndex(){
+    global $pdo;
 
+    $sql = "SELECT LAST_INSERT_ID() as ID;";
+    //lg($sql);
+    
+    // query
+    try {
+      
+      $q = $pdo->query($sql);
+      
+    } catch(PDOException $e) {
+      lg( "something went wrong while requesting index");
+      return;
+    }
+    
+    $row=$q->fetch();
+    
+    if (isset($row["ID"])){
+      $index = $row["ID"];
+    } else {
+      $index = -1;
+    }
+    //lg( "last index is ".$index );  
+    
+    return $index;
+  }
 
   function getColumns( $table ){
     global $pdo;
@@ -177,7 +254,7 @@
   }
   
   
-  function searchInTable( $table, $search ){
+  function searchInTable( $table, $search, $group="nummer" ){
     global $pdo;
     
     $columns = getColumns( $table );
@@ -194,7 +271,7 @@
     }
 
     //$sql .= ' );';
-    $sql .= ') GROUP BY ( `nummer` );';
+    $sql .= ') GROUP BY ( `'.$group.'` );';
     
     try {
 	lg($sql);

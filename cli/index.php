@@ -2,16 +2,17 @@
 
   date_default_timezone_set('Europe/Berlin');
   include( 'lib.php');
+  include( 'dbConnection.php');
   include( 'EDPDefinition.php');
   include( 'EDPConsole.php');
-  include( 'dbConnection.php');
+  include( 'prepareDatabase.php');
 
   echo "<pre>";
   lg( "start" );
   
   
   connectToDb();
-  
+/*  
   // load complete table info from EDP
   getEDPTables();
 
@@ -39,6 +40,10 @@
     }
 
   }
+*/
+  lg( "import done" );
+  
+  prepareDatabase();
   
   lg( "bye" );
   echo "</pre>";  

@@ -1,7 +1,4 @@
 <?php
-  define( "ASCII", 0 );
-  define( "FLOAT", 1 );
-  define( "TIMESTAMP", 2 );
 
   function splitLine( $line ){
     $elements = preg_split( '/#/', $line );
