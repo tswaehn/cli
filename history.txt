@@ -7,7 +7,10 @@ open
 - import von arbeitsgängen
 - import von interner fertigung aus "Betr-Auftrag:Betriebsaufträge"
 
-
+- x_article : 
+  - datum und version übernehmen
+  - name bereinignen, ggf. andere felder benutzen und aus namen ausschneiden
+    
  
 
 2014 feb. 23

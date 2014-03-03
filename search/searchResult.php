@@ -43,15 +43,19 @@
       $diff = $end-$start;      
       $count=$result->rowCount();
       
-
-      echo "found ".$count." results in ".$diff."secs";
-      foreach ($result as $item){
+      if (!empty($result)){
       
-	echo '<div id="search_item">';
-	  echo shortArticle( $item );
-	echo '</div>';
+	echo "found ".$count." results in ".$diff."secs";
+	foreach ($result as $item){
+	
+	  echo '<div id="search_item">';
+	    echo shortArticle( $item );
+	  echo '</div>';
+	}
+      } else {
+	
+	echo "failed to receive data";
       }
-    
   }
   
   $search = getUrlParam('search');

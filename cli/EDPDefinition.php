@@ -4,7 +4,7 @@
   $edp_conf = '
 
 [Teil:Artikel]
-fieldlist=nummer,name,such,sucherw,erfass,stand,ebez,bsart,ynlief,zuplatz,abplatz,ypdf1,ydxf,yxls,ytpdf,ytlink,bild,bbesch,foto,fotoz,catpics,catpicsz,catpicl,catpiclz,caturl,zn,tabnr,anzahl,elanzahl,elart,elarta,elem,elex,bestand,lgbestand,zbestand,dbestand,lgdbestand,ve,fve,versionn,yzeissnr,zeichn,bzeich,yersteller,lief,lief2,zoll,wstoff
+fieldlist=nummer,name,such,sucherw,erfass,stand,ebez,bsart,ynlief,zuplatz,abplatz,ypdf1,ydxf,yxls,ytpdf,ytlink,bild,bbesch,foto,fotoz,catpics,catpicsz,catpicl,catpiclz,caturl,zn,tabnr,anzahl,elanzahl,elart,elarta,elem,elex,bestand,lgbestand,zbestand,dbestand,lgdbestand,ve,fve,versionn,yzeissnr,zeichn,yersteller,lief,lief2,zoll,wstoff
 sortby=nummer
 maxdatasize=100000
 byrows=0
@@ -56,12 +56,15 @@ search-and=1
 
 ';
   
-  // create config for EDPConsole
-  $ini_filename = "EDP.ini";
-  // the external program reads the ini-file as ANSI thus convert it into ANSI
-  $edp_conf = iconv( "UTF-8", "Windows-1252", $edp_conf );
-  file_put_contents( $ini_filename, $edp_conf );
-  
+  function createEDPini(){
+    global $edp_conf;
+    // create config for EDPConsole
+    $ini_filename = "EDP.ini";
+    // the external program reads the ini-file as ANSI thus convert it into ANSI
+    $edp_conf = iconv( "UTF-8", "Windows-1252", $edp_conf );
+    file_put_contents( $ini_filename, $edp_conf );
+  }
+    
   class EDPImport {
     
     public $tablename;

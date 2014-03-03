@@ -12,9 +12,10 @@
   define( "INT", 4 );
   
   // table names
-  define( "DB_ARTICLE", "article" );
-  define( "DB_PRODUCTION_LIST", "production_list" );
-  
+  define( "DB_ARTICLE", "x_article" );
+  define( "DB_PRODUCTION_LIST", "x_production_list" );
+  define( "DB_DICT", "x_dict");
+  define( "DB_DICT_RANK", "x_dict_rank" );  
   
   include( 'config.txt');
 
@@ -252,7 +253,39 @@
     
     return $columns;
   }
+
+  function dbGetFromTable( $table, $fields="", $search="", $limit=5, $offset=0 ){
+    global $pdo;
+    
+    if (is_array($fields)){
+      $fields_str = implode( ",", $fields );
+    } else {
+      $fields_str = "*";
+    }
+    if (empty($search)){
+      $search = "1";
+    }
+    
+    $sql = 'SELECT '.$fields_str.' FROM '.q($table).' WHERE ('.$search.') LIMIT '.$limit.' OFFSET '.$offset;
+    
+    try {
+	lg($sql);
+	$starttime = microtime(true); 
+	$result = $pdo->query( $sql);
+	$endtime = microtime(true); 
+	$timediff = $endtime-$starttime;
+    } catch (Exception $e) {
+	lg("search failed");
+	return;
+    } 
+    
+    lg('exec time is '.($timediff) );
+    
+    lg('found '.$result->rowCount().' items' );
+    
+    return $result;  
   
+  }  
   
   function searchInTable( $table, $search, $group="nummer" ){
     global $pdo;

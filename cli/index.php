@@ -12,7 +12,10 @@
   
   
   connectToDb();
-
+/*
+  // 
+  createEDPini();
+  
   // load complete table info from EDP
   getEDPTables();
 
@@ -40,7 +43,7 @@
     }
 
   }
-
+*/
   lg( "import done" );
   
   prepareDatabase();

@@ -95,7 +95,7 @@
     $retStr .= "<table>";
     foreach ($result as $item ){
       
-      $result=dbGetFromTable(DB_LOOKUP, array( "id", "nummer", "rank", "such" , "name"), "id='".$item["nummer"]."'" );
+      $result=dbGetFromTable(DB_ARTICLE, array( "article_id", "nummer", "rank", "such" , "name"), "article_id='".$item["article_id"]."'" );
       
       $article = $result->fetch();
       

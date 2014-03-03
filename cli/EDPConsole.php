@@ -14,7 +14,7 @@
     //$contents=preg_replace("/[^A-Za-z0-9\n#,>\-\ \ö\ä\ü\Ö\Ä\Ü\ß]/", '', $contents);
    
     // remove white spaces
-    $contents= preg_replace( array('/#\s+/','/\s+#/'), '#', $contents);
+    //$contents= preg_replace( array('/#\s+/','/\s+#/'), '#', $contents);
     
     //print_r($contents);
     foreach(preg_split("/((\r?\n)|(\r\n?))/", $contents) as $line){
@@ -127,7 +127,7 @@
       switch ( $line[1] ){
 	case 'A': $type = ASCII; break;
 	case 'N': $type = FLOAT; break;
-	case 'D': $type = TIMESTAMP; break;
+	case 'D': $type = ASCII; break; // fix: treat datetime as ASCII due to conversion problems
 	default:
 	  $type = $line[1] ; 
 	  lg( "unknown type ".$line[1] );
@@ -139,7 +139,7 @@
       $fieldnames_str .= ','.$line[0];
       
     }
-    
+//     
     lg( "fieldnames of ".$table." are ".count($fieldnames ) );
     lg( $fieldnames_str );
     return $fieldnames;

@@ -84,7 +84,7 @@
     //		ON d0.elem_id=d1.article_id 
     //		ORDER BY tabnr
     //
-    $sql = "SELECT d1.*,d0.elem_type,d0.cnt,d0.tabnr FROM (SELECT * FROM `production_list` WHERE article_id=".$article_id.") AS d0 INNER JOIN `article` AS d1 ON d0.elem_id=d1.article_id ORDER BY tabnr";
+    $sql = "SELECT d1.*,d0.elem_type,d0.cnt,d0.tabnr FROM (SELECT * FROM ".q(DB_PRODUCTION_LIST)." WHERE article_id=".$article_id.") AS d0 INNER JOIN ".q(DB_ARTICLE)." AS d1 ON d0.elem_id=d1.article_id ORDER BY tabnr";
     $result = dbExecute( $sql );
     
     disp( "");
