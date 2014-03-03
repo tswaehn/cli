@@ -23,7 +23,7 @@
     // - remove single chars
     // - replace sub-double entries ex: remov "cable" where specific "cameracable" exists
     // - implement blacklist
-    // - remove "@@ ... "
+    // - remove "@@ ... " but !!7900-00001 !!
     // - add more fields to index
     
     return $dict;

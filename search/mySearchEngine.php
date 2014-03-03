@@ -67,7 +67,7 @@
     //showResultCount($table, $searches, $columns );
     
     //$sql .= ' );';
-    $sql .= ') GROUP BY ( `nummer` );';
+    $sql .= ') GROUP BY ( `nummer` ) ORDER BY rank ASC;';
     
     try {
 	lg($sql);

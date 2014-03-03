@@ -1,10 +1,9 @@
 <?php
 
-  
-  function getArticle( $abas_nr ){
+  function getArticleByAbasNr( $abas_nr ){
     global $pdo;
     
-    $table="Teil:Artikel";
+    $table=DB_ARTICLE;
     
     $sql = "SELECT * FROM ".q($table)." WHERE ( nummer = :abas_nr ) LIMIT 1;";
     
@@ -30,58 +29,25 @@
     return $result;
   
   }
-  /*
-  function getAllParents( $article ){
+  
+  function getArticle( $articleId ){
     global $pdo;
     
+    $table=DB_ARTICLE;
     
-    function parseArticleParents( $result, $abas_nr, $branch, &$group, &$branches ){
-
-      $group++;
-      
-      $data = array( ":abas_nr" => $abas_nr );
-      $result->execute( $data );
-
-      $branch[] = array( "nummer"=>$abas_nr, "gruppe"=>$group );      
-      $count = $result->rowCount();
-      
-      if ($count > 0){
-      
-	$parents = $result->fetchAll();
-	
-	foreach ($parents as $parent){
-	  
-	  parseArticleParents( $result, $parent["nummer"], $branch,$group, $branches );
-	}
-	
-      } else {
-	
-	disp( "branch closed ".$abas_nr );
-	print_r( $branch );	
-      }
-
-    }
-
-    $table="Teil:Artikel";
-    
-    $sql = "SELECT nummer,elem FROM ".q($table)." WHERE ( elem = :abas_nr );";
-    
-    $branches = array();
+    $sql = "SELECT * FROM ".q($table)." WHERE ( article_id = :article_id ) LIMIT 1;";
     
     try {
 	lg($sql);
 	$starttime = microtime(true); 
 	
 	$result = $pdo->prepare( $sql);
-	
-	$group=0;
-	parseArticleParents( $result,$article["nummer"], array(), $group, $branches);
-	
+	$data = array( ":article_id" => $articleId );
+	$result->execute( $data );
 	
 	$endtime = microtime(true); 
 	$timediff = $endtime-$starttime;
-	
-	
+
     } catch (Exception $e) {
 	lg("search failed");
 	return;
@@ -90,10 +56,10 @@
     lg('exec time is '.($timediff) );
     //lg('found '.$result->rowCount().' items' );
     
-    return $result;  
- 
+    return $result;
+  
   }
-  */
+
   
   function getSimilarItems( $article ){
     global $pdo;
@@ -101,7 +67,7 @@
     $s_abasNr = '%'. substr($article["nummer"],0,-1) .'%';
     //$s_such = '%'.preg_replace('/[^\da-z]/i', '%', $article["such"] ).'%';
     //$s_such = '%'. preg_replace("/[^A-Za-z\.\/]/", '%', $article["such"]) .'%';  
-    $table="Teil:Artikel";
+    $table=DB_ARTICLE;
     
     $sql = "SELECT * FROM ".q($table)." WHERE ( nummer like :abasNr AND nummer <> :nummer ) GROUP BY (`nummer`);";
     

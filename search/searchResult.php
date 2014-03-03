@@ -10,7 +10,7 @@
       echo "found ".$count." results";
       foreach ($result as $item){
       
-	echo '<div id="item" style="border: thin solid blue; padding:10px; margin:10px">';
+	echo '<div id="item" style="border: thin solid gray; padding:10px; margin:10px">';
 	  echo shortArticle( $item );
 	echo '</div>';
       }
@@ -37,7 +37,7 @@
   function mySearch( $search ){
       
       $start=microtime(true);
-      $result = mySearchInTable('Teil:Artikel', $search );
+      $result = mySearchInTable(DB_ARTICLE, $search );
       $end=microtime(true);
       
       $diff = $end-$start;      
@@ -47,7 +47,7 @@
       echo "found ".$count." results in ".$diff."secs";
       foreach ($result as $item){
       
-	echo '<div id="item" style="border: thin solid blue; padding:10px; margin:10px">';
+	echo '<div id="search_item">';
 	  echo shortArticle( $item );
 	echo '</div>';
       }

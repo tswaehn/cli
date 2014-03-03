@@ -32,7 +32,7 @@
 		
     case "article": 
 		$title ="Artikel";
-		$script="./article/view.php";
+		$script="./article/articleView.php";
 		break;
 		
     case "overdrive":

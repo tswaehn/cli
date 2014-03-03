@@ -4,7 +4,7 @@
   $edp_conf = '
 
 [Teil:Artikel]
-fieldlist=nummer,name,such,sucherw,erfass,stand,ebez,bsart,ynlief,zuplatz,abplatz,ypdf1,ydxf,yxls,ytpdf,ytlink,bild,bbesch,foto,fotoz,catpics,catpicsz,catpicl,catpiclz,caturl,zn,tabnr,anzahl,elanzahl,elart,elarta,elem,elex,bestand,lgbestand,zbestand,dbestand,lgdbestand,ve,fve,versionn
+fieldlist=nummer,name,such,sucherw,erfass,stand,ebez,bsart,ynlief,zuplatz,abplatz,ypdf1,ydxf,yxls,ytpdf,ytlink,bild,bbesch,foto,fotoz,catpics,catpicsz,catpicl,catpiclz,caturl,zn,tabnr,anzahl,elanzahl,elart,elarta,elem,elex,bestand,lgbestand,zbestand,dbestand,lgdbestand,ve,fve,versionn,yzeissnr,zeichn,bzeich,yersteller,lief,lief2,zoll,wstoff
 sortby=nummer
 maxdatasize=100000
 byrows=0

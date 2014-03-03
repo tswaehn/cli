@@ -9,7 +9,7 @@
       removeTable( $table );
     }
     $fields = array( "article_id", "rank", "nummer", "such", "name", "ebez", 
-		     "bsart", "ynlief", "zuplatz", "abplatz", "elart", "elarta", 
+		     "bsart", "ynlief", "zuplatz", "abplatz",  
 		     "bestand", "lgbestand", "zbestand", "dbestand", "lgdbestand", 
 		     "ve", "fve" );
 
@@ -43,13 +43,6 @@
     $fieldinfo["abplatz"]["type"]=ASCII;
     $fieldinfo["abplatz"]["size"]=15;
 
-    
-    $fieldinfo["elart"]["type"]=ASCII;
-    $fieldinfo["elart"]["size"]=3;
-    
-    $fieldinfo["elarta"]["type"]=ASCII;
-    $fieldinfo["elarta"]["size"]=16;
-
     $fieldinfo["bestand"]["type"]=FLOAT;
     $fieldinfo["bestand"]["size"]=0;
 
@@ -75,7 +68,7 @@
     createTable( $table, $fields, $fieldinfo );
 
     $sel_fields = array( "nummer", "such", "name", "ebez", 
-		     "bsart", "ynlief", "zuplatz", "abplatz", "elart", "elarta", 
+		     "bsart", "ynlief", "zuplatz", "abplatz", 
 		     "bestand", "lgbestand", "zbestand", "dbestand", "lgdbestand", 
 		     "ve", "fve" );
     $fieldStr = "`".implode( "`,`", $sel_fields )."`";
@@ -97,7 +90,7 @@
     if (tableExists( $table ) == true ){
       removeTable( $table );
     }
-    $fields = array( "list_nr", "article_id", "elem_id", "cnt", "row",  );
+    $fields = array( "list_nr", "article_id", "elem_id", "elem_type", "cnt", "tabnr",  );
 
     $fieldinfo["list_nr"]["type"]=ASCII;
     $fieldinfo["list_nr"]["size"]=15;
@@ -108,23 +101,54 @@
 
     $fieldinfo["elem_id"]["type"]=INT;
     $fieldinfo["elem_id"]["size"]=0;
+
+    $fieldinfo["elem_type"]["type"]=INT;
+    $fieldinfo["elem_type"]["size"]=0;
     
     $fieldinfo["cnt"]["type"]=FLOAT;
     $fieldinfo["cnt"]["size"]=0;
 
-    $fieldinfo["row"]["type"]=INT;
-    $fieldinfo["row"]["size"]=0;
+    $fieldinfo["tabnr"]["type"]=INT;
+    $fieldinfo["tabnr"]["size"]=0;
     
     
     createTable( $table, $fields, $fieldinfo );
 
-    $sel_fields = array(  "list_nr", "article_id", "elem_id", "cnt", "row"  );
+    // prepare insert fields
+    $sel_fields = array(  "list_nr", "article_id", "elem_id", "elem_type", "cnt", "tabnr"  );
     $fieldStr = "`".implode( "`,`", $sel_fields )."`";
+   
+    // prepare insert query
+    $sql_insert = "INSERT INTO ".q(DB_PRODUCTION_LIST)." (".$fieldStr.") VALUES ";
     
-    $sql = "INSERT INTO ".q(DB_PRODUCTION_LIST)." (".$fieldStr.") ";
-    $sql .= "SELECT d0.nummer AS liste_nr,d0.anzahl AS cnt,d0.tabnr AS `row`,d1.article_id,d2.article_id AS elem_id FROM (SELECT * FROM `Fertigungsliste:Fertigungsliste` WHERE 1) AS d0,(SELECT article_id,nummer FROM `article` WHERE 1) AS d1, (SELECT article_id,nummer FROM `article` WHERE 1) AS d2 WHERE d0.artikel=d1.nummer AND d0.elem=d2.nummer";
+    // get all entries which need to be copied
+    $sql = "SELECT * FROM `Fertigungsliste:Fertigungsliste` WHERE 1 ";
+    $result = dbExecute($sql);
     
-    dbExecute( $sql );  
+    foreach ($result as $item){
+    
+      $sql = "SELECT article_id FROM `article` WHERE nummer='".$item["artikel"]."'";
+      $q = dbExecute( $sql );
+      $article = $q->fetch();
+      $article_id = $article["article_id"];
+	  
+      if ($item["elart"] == 1){
+	$sql = "SELECT article_id FROM `article` WHERE nummer='".$item["elem"]."'";
+	$q = dbExecute( $sql );
+	$elem = $q->fetch();
+	$elem_id = $elem["article_id"];
+      } else {
+	$elem_id = -1;
+      }
+      
+      $values = array( $item["nummer"], $article_id, $elem_id, $item["elart"], $item["anzahl"], $item["tabnr"] );
+      $valueStr = "('".implode( "','", $values )."')";
+      
+      dbExecute( $sql_insert.$valueStr );
+      
+      
+    }
+  
   }
 
   function prepareDatabase(){

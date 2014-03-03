@@ -3,6 +3,23 @@ td {
 
 }
 
+a:link { 
+    color:blue; text-decoration:none; 
+    }
+a:visited { 
+    color:blue; text-decoration:none; 
+    }
+a:focus { 
+    color:blue; text-decoration:none; 
+    }
+a:hover { 
+    color:blue; text-decoration:underline; 
+    }
+a:active { 
+    color:blue; text-decoration:none; 
+    }
+
+
 #caption {
   font-weight:bold;
   font-size:small;
@@ -13,11 +30,14 @@ td {
 
 #head {
   border:thin solid grey;
-  background-color: #aaaaaa;
+  //background-color: #aaaaaa;
+  background-image:url(head.png);
+  background-repeat:repeat;
   
   //width:100%;
   margin:0px;
   padding:10px;
+  height:50px;
 }
 
 #title {
@@ -41,4 +61,11 @@ td {
   padding-top:20px;
   padding-bottom:20px;
 
+}
+
+#search_item {
+  background-color:#fdfdfd;
+  border: thin solid gray; 
+  padding:10px; 
+  margin:10px
 }

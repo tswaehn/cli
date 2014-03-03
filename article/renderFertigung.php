@@ -1,5 +1,5 @@
 <?php
-
+/*
   function renderFertigung( $article ){
     div("fertigung");
     disp('<span id="caption">Fertigung</span><br>');
@@ -50,49 +50,69 @@
     disp("</tr></table>");
     ediv();
   }
-
+*/
   function renderFertingsliste($article){
 
     div("fertigungsliste");
     disp('<span id="caption">Fertigungsliste (Stammdaten)</span><br>');
-    $abas_nr = $article["nummer"];
-    
+    $article_id = $article["article_id"];
+/*    
     echo '<div id="fertigungsliste-ajax"></div>';
     
     $updateUrl = "ajax.php?action=fertigungsliste&abas_nr=".$article["nummer"];
     $tag="fertigungsliste-ajax";
     insertUpdateScript( $updateUrl, $tag, $cyclic = 0 );
-
+*/
+    ajaxRenderFertingsliste($article_id);
+    
     ediv();
   }  
   
   
-  function ajaxRenderFertingsliste(){ 
+  function ajaxRenderFertingsliste($article_id=""){ 
     
-    $abas_nr = getUrlParam("abas_nr");
- 
-    $result = getFertigungsliste( $abas_nr );
+    if (empty($article_id)){
+      $article_id = getUrlParam("article_id");
+    }
+    
+    
+    // join production-list with articles to get required info
+    //
+    // SELECT d1.*,d0.elem_type,d0.cnt,d0.tabnr FROM 
+    //		(SELECT * FROM `production_list` WHERE article_id=12028) AS d0 
+    //		INNER JOIN `article` AS d1 
+    //		ON d0.elem_id=d1.article_id 
+    //		ORDER BY tabnr
+    //
+    $sql = "SELECT d1.*,d0.elem_type,d0.cnt,d0.tabnr FROM (SELECT * FROM `production_list` WHERE article_id=".$article_id.") AS d0 INNER JOIN `article` AS d1 ON d0.elem_id=d1.article_id ORDER BY tabnr";
+    $result = dbExecute( $sql );
+    
     disp( "");
     
-    disp( "<table>" );
+    if (!empty($result)){
+      disp( "<table>" );
 
-    foreach ($result as $part ){
+      foreach ($result as $part ){
 
-      $result_article = getArticle( $part["elem"] );
-      $part_info = $result_article->fetch();
-      
-      //disp( $item["zn"]." ".$item["tabnr"]." ".$item["anzahl"]." ".$item["elanzahl"]." ".$item["elart"]." ".$item["elarta"]." ".$item["elem"]." ".$item["elex"] );
-      echo "<tr>";
-      echo "<td>".$part["tabnr"]."</td>";
-      echo '<td><a href="?action=article&abas_nr='.$part["elem"].'">'.$part["elem"]."</td>";
-      echo "<td>".$part["elarta"]."</td>";
-      echo "<td>".$part_info["such"]."</td>";    
-      echo "<td>".$part["anzahl"]."</td>";
-      echo "<td>".$part["elle"]."</td>";
-      
-      echo "</tr>";
+	//disp( $item["zn"]." ".$item["tabnr"]." ".$item["anzahl"]." ".$item["elanzahl"]." ".$item["elart"]." ".$item["elarta"]." ".$item["elem"]." ".$item["elex"] );
+	echo "<tr>";
+	echo "<td>".$part["tabnr"]."</td>";
+	echo '<td><a href="?action=article&article_id='.$part["article_id"].'">'.$part["nummer"]."</td>";
+	switch ($part["elem_type"]){
+	  case 1: echo "<td>Artikel</td>";break;
+	  case 3: echo "<td>Arbeitsschritt</td>";break;
+	  default: echo "<td>unbekannt</td>";break;
+	}
+	echo "<td>".$part["such"]."</td>";    
+	echo "<td>".$part["cnt"]."</td>";
+	echo "<td>".$part["ve"]."</td>";
+	echo "<td>".$part["abplatz"]."</td>";	
+	echo "<td>".renderBestand( $part)."</td>";	
+	
+	echo "</tr>";
+      }
+      disp( "</table>" ); 
     }
-    disp( "</table>" ); 
   
   
   }
