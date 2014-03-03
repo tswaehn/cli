@@ -143,13 +143,13 @@
     
     foreach ($result as $item){
     
-      $sql = "SELECT article_id FROM `article` WHERE nummer='".$item["artikel"]."'";
+      $sql = "SELECT article_id FROM ".q(DB_ARTICLE)." WHERE nummer='".$item["artikel"]."'";
       $q = dbExecute( $sql );
       $article = $q->fetch();
       $article_id = $article["article_id"];
 	  
       if ($item["elart"] == 1){
-	$sql = "SELECT article_id FROM `article` WHERE nummer='".$item["elem"]."'";
+	$sql = "SELECT article_id FROM ".q(DB_ARTICLE)." WHERE nummer='".$item["elem"]."'";
 	$q = dbExecute( $sql );
 	$elem = $q->fetch();
 	$elem_id = $elem["article_id"];
