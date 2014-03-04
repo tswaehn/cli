@@ -74,7 +74,7 @@
   echo '<div id="articleview">';
 
   if (empty($article)){
-    echo 'Artikel nicht gefunden. Vielleicht einen Artikel <a href="?action=search">suchen</a>?';
+    echo 'Artikel nicht gefunden. Bitte korrekte Artikelnummer eingeben, oder vielleicht einen Artikel <a href="?action=search">suchen</a>?';
     die();
   }
    

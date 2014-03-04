@@ -229,8 +229,11 @@
     $string = preg_replace( "/\d{6}\-\d{4}\-\d{3}|\/\d{2}/", "", $string );
     
     // replace special chars/unwanted chars by separator
-    $string = preg_replace( "/[^A-Za-z0-9\ö\ä\ü\Ö\Ä\Ü\ß\.]/", "#", $string );
+    $string = preg_replace( "/[^A-Za-z0-9\ö\ä\ü\Ö\Ä\Ü\ß\.]/", " ", $string );
     
+    if (is_numeric($string)){
+      $string = "";
+    }
     
     return $string;
   }
@@ -276,7 +279,7 @@
 	  $str = cleanupString( $str_val );
       }
       
-      $dict_str = $dict_str."#".$str;
+      $dict_str = $dict_str." ".$str;
     
     }
 
