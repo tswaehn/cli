@@ -99,7 +99,6 @@
       $field = $fields[$i];
       
       $type=$fieldinfo[$field]['type'];
-      $size=$fieldinfo[$field]['size'];
       
       $type_str = "";
       switch ($type){

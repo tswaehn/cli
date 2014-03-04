@@ -16,7 +16,13 @@
     <a href="?action=article" >Artikel<a>
 
   </td><td style="text-align:right">
-    <a href="?action=overdrive">..::oVerdRive::..<a>
+  
+  <?php
+    if (defined("_EN_OVERDRIVE_")){
+      echo '<a href="?action=overdrive">..::oVerdRive::..<a>';
+    }
+    ?>
+    
     <a href="?action=raw">°°raw°°<a>
     
   </td></tr>

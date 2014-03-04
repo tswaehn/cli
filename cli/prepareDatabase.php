@@ -8,7 +8,7 @@
     if (tableExists( $table ) == true ){
       removeTable( $table );
     }
-    $fields = array( "article_id", "rank", "nummer", "such", "name", "ebez", 
+    $new_table_fields = array( "article_id", "rank", "nummer", "such", "name", "ebez", 
 		     "bsart", "ynlief", "zuplatz", "abplatz",  
 		     "bestand", "lgbestand", "zbestand", "dbestand", "lgdbestand", 
 		     "ve", "fve",
@@ -103,9 +103,9 @@
     $fieldinfo["erfass"]["type"]=ASCII;    
     $fieldinfo["stand"]["type"]=ASCII;        
     
-    createTable( $table, $fields, $fieldinfo );
+    createTable( $table, $new_table_fields, $fieldinfo );
 
-    $sel_fields = array( "nummer", "such", "name", "ebez", 
+    $copy_fields = array( "nummer", "such", "name", "ebez", 
 		     "bsart", "ynlief", "zuplatz", "abplatz", 
 		     "bestand", "lgbestand", "zbestand", "dbestand", "lgdbestand", 
 		     "ve", "fve", "zeichn", "lief", "lief2", "yersteller", "yzeissnr",
@@ -114,7 +114,7 @@
 		     "erfass", "stand"
 		     );
 		     
-    $fieldStr = "`".implode( "`,`", $sel_fields )."`";
+    $fieldStr = "`".implode( "`,`", $copy_fields )."`";
     
     $sql = "INSERT INTO ".q(DB_ARTICLE)." (".$fieldStr.") ";
     $sql .= "SELECT ".$fieldStr." FROM `Teil:Artikel` WHERE 1";
@@ -363,6 +363,18 @@
 
 
   function dbCreateRank(){
+    
+    // for faster access: calculate data once and store into temp table
+    $table = DB_DICT_RANK;
+    if (tableExists( $table ) == true ){
+      removeTable( $table );
+    }
+    
+    $sql = "CREATE TABLE ".q($table)." AS SELECT id,str,count(*) AS cnt FROM ".q(DB_DICT)." GROUP BY `str` ";
+    $rankRes = dbExecute( $sql );
+    
+
+    // --- 
     $table = DB_ARTICLE;
     
     // get all entries by id
@@ -375,14 +387,15 @@
       
       $article_id = $item["article_id"];
       
-      $sql = "SELECT article_id,sum(cnt) AS rank FROM (SELECT * FROM `dict` WHERE (article_id=".$article_id.")) AS d0, dict_rank AS d1 WHERE d0.str=d1.str GROUP BY d0.article_id";
+      //$sql = "SELECT article_id,sum(cnt) AS rank FROM (SELECT * FROM `dict` WHERE (article_id=".$article_id.")) AS d0, dict_rank AS d1 WHERE d0.str=d1.str GROUP BY d0.article_id";
+      $sql = "SELECT sum(cnt) AS rank FROM ".q(DB_DICT_RANK)." WHERE (str) IN (SELECT str FROM ".q(DB_DICT)." WHERE article_id=".$article_id.")";
       $rankRes = dbExecute( $sql );
       $res = $rankRes->fetch();
 
       $sql = "UPDATE ".q(DB_ARTICLE)." SET rank = ".$res["rank"]." WHERE article_id = ".$article_id;
       dbExecute( $sql );
             
-      echo $res["article_id"]." ".$res["rank"];
+      echo $article_id." ".$res["rank"];
     }
     
   }
@@ -391,7 +404,7 @@
     
     dbCreateTableArticle();
     dbCreateDict();
-    //dbCreateRank();
+    dbCreateRank();
     dbCreateProductionList();
   }
 

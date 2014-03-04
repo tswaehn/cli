@@ -12,9 +12,9 @@
     
     $na="(aktuell nicht verfügbar)";
     
-    disp( "Erstellt ".$na );
-    disp( "Änderung ".$na );
-    disp( "Version ".$na );
+    disp( "Erstellt ".$article["erfass"]." von ".$article["yersteller"] );
+    disp( "Änderung ".$article["stand"] );
+    //disp( "Version ".$na );
     ediv();
   }
   
@@ -64,18 +64,19 @@
       
     echo '<form action="?action=article" method="POST">
 	    ABAS Nr.: <input type="edit" name="search_abas_nr" value="'.$abas_nr.'">
-	    <input type="submit" value="search">
+	    <input type="submit" value="öffnen">
 	  </form>';    
       
     
   echo '</div>';
 
-  if (empty($article)){
-    die();
-  }
-   
   
   echo '<div id="articleview">';
+
+  if (empty($article)){
+    echo 'Artikel nicht gefunden. Vielleicht einen Artikel <a href="?action=search">suchen</a>?';
+    die();
+  }
    
 
   echo "<table>";
