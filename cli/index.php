@@ -12,7 +12,7 @@
   
   
   connectToDb();
-/*
+
   // 
   createEDPini();
   
@@ -43,10 +43,10 @@
     }
 
   }
-*/
+
   lg( "import done" );
   
-  prepareDatabase();
+ // prepareDatabase();
   
   lg( "bye" );
   echo "</pre>";  

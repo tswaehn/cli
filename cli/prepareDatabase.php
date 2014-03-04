@@ -12,7 +12,12 @@
 		     "bsart", "ynlief", "zuplatz", "abplatz",  
 		     "bestand", "lgbestand", "zbestand", "dbestand", "lgdbestand", 
 		     "ve", "fve",
-		     "zeichn","lief","lief2","yersteller","yzeissnr"
+		     "zeichn","lief","lief2","yersteller","yzeissnr",
+		     
+		     "ypdf1", "ydxf", "yxls", "ytpdf", "ytlink", "bild", "bbesch", "foto",
+		     "fotoz", "catpics", "catpicsz", "catpiclz", "caturl",
+		     
+		     "erfass", "stand"
 		     );
 
     $fieldinfo["article_id"]["type"]=INDEX;
@@ -80,13 +85,35 @@
     
     $fieldinfo["yzeissnr"]["type"]=ASCII;
     $fieldinfo["yzeissnr"]["size"]=15;
+    
+    $fieldinfo["ypdf1"]["type"]=ASCII;
+    $fieldinfo["ydxf"]["type"]=ASCII;    
+    $fieldinfo["yxls"]["type"]=ASCII;
+    $fieldinfo["ytpdf"]["type"]=ASCII;    
+    $fieldinfo["ytlink"]["type"]=ASCII;
+    $fieldinfo["bild"]["type"]=ASCII;    
+    $fieldinfo["bbesch"]["type"]=ASCII;
+    $fieldinfo["foto"]["type"]=ASCII;    
+    $fieldinfo["fotoz"]["type"]=ASCII;
+    $fieldinfo["catpics"]["type"]=ASCII;    
+    $fieldinfo["catpicsz"]["type"]=ASCII;
+    $fieldinfo["catpiclz"]["type"]=ASCII;    
+    $fieldinfo["caturl"]["type"]=ASCII;        
 
+    $fieldinfo["erfass"]["type"]=ASCII;    
+    $fieldinfo["stand"]["type"]=ASCII;        
+    
     createTable( $table, $fields, $fieldinfo );
 
     $sel_fields = array( "nummer", "such", "name", "ebez", 
 		     "bsart", "ynlief", "zuplatz", "abplatz", 
 		     "bestand", "lgbestand", "zbestand", "dbestand", "lgdbestand", 
-		     "ve", "fve", "zeichn", "lief", "lief2", "yersteller", "yzeissnr" );
+		     "ve", "fve", "zeichn", "lief", "lief2", "yersteller", "yzeissnr",
+		     "ypdf1", "ydxf", "yxls", "ytpdf", "ytlink", "bild", "bbesch", "foto",
+		     "fotoz", "catpics", "catpicsz", "catpiclz", "caturl",
+		     "erfass", "stand"
+		     );
+		     
     $fieldStr = "`".implode( "`,`", $sel_fields )."`";
     
     $sql = "INSERT INTO ".q(DB_ARTICLE)." (".$fieldStr.") ";
@@ -342,7 +369,7 @@
     $result = dbGetFromTable( $table, array("article_id"), "rank IS NULL", 100000 );
     
     
-    hier zuvor noch dict_rank aus "count" des dict erstellen !!
+    //hier zuvor noch dict_rank aus "count" des dict erstellen !!
     
     foreach ($result as $item){
       

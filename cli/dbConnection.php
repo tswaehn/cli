@@ -12,10 +12,10 @@
   define( "INT", 4 );
   
   // table names
-  define( "DB_ARTICLE", "x_article" );
-  define( "DB_PRODUCTION_LIST", "x_production_list" );
-  define( "DB_DICT", "x_dict");
-  define( "DB_DICT_RANK", "x_dict_rank" );  
+  define( "DB_ARTICLE", "gk_article" );
+  define( "DB_PRODUCTION_LIST", "gk_production_list" );
+  define( "DB_DICT", "gk_dict");
+  define( "DB_DICT_RANK", "gk_dict_rank" );  
   
   include( 'config.txt');
 
@@ -103,7 +103,7 @@
       
       $type_str = "";
       switch ($type){
-	case ASCII: $type_str = "VARCHAR(".$size.")";break;
+	case ASCII: $type_str = "VARCHAR(255)";break;
 	case FLOAT: $type_str = "FLOAT";break;
 	case TIMESTAMP: $type_str = "DATETIME";break;
 	case INDEX: $type_str= "BIGINT(32) NOT NULL AUTO_INCREMENT, PRIMARY KEY ($field)";break;
