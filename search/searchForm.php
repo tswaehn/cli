@@ -29,15 +29,17 @@
 		  <input type="submit" value="search">
 		  </form>';
 
-
 	    break;
   
     default:
     
 	echo '<form action="?action=search" method="POST">
+			<span style="margin-right:10px">Suchbegriff </span>
 	      <input type="edit" name="search" value="'.$search.'" size="40">
 	      <input type="submit" value="search">
 	      </form>';
+	echo 'Suche nach bsp. <span style="color:grey;font-weight:bold">bnc kabel</span>';
+	echo ' oder <span style="color:grey;font-weight:bold">lemo stecker</span> ';
 
   }
   

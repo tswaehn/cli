@@ -11,10 +11,11 @@
   </colgroup>
   
   <tr><td>
-  
-    <a href="?action=suchen" >Suchen<a>
-    <a href="?action=article" >Artikel<a>
-
+	
+	
+    <span id="menu"><a href="?action=suchen" >Suchen<a></span>
+    <span id="menu"><a href="?action=article" >Artikel<a></span>
+	
   </td><td style="text-align:right">
   
   <?php
