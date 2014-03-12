@@ -3,7 +3,7 @@
   $search = getUrlParam('search');
   
   if ($search ==''){
-    $search ='bnc kabel';
+    $search ='';
   }
   
   $mode=getUrlParam("mode");
@@ -36,9 +36,9 @@
 	echo '<form action="?action=search" method="POST">
 			<span style="margin-right:10px">Suchbegriff </span>
 	      <input type="edit" name="search" value="'.$search.'" size="40">
-	      <input type="submit" value="search">
+	      <input type="submit" value="suchen">
 	      </form>';
-	echo 'Suche nach bsp. <span style="color:grey;font-weight:bold">bnc kabel</span>';
+	echo 'Beispiel: <span style="color:grey;font-weight:bold">bnc kabel</span>';
 	echo ' oder <span style="color:grey;font-weight:bold">lemo stecker</span> ';
 
   }

@@ -1,6 +1,6 @@
 <?php
   
-  define( "BUILD_NR", "v0.1.1");
+  define( "BUILD_NR", "v0.2.0");
   $scriptStartTime = microtime(true);
   
   include('./lib/lib.php');
@@ -51,7 +51,7 @@
     global $scriptStartTime;
     $scriptStopTime=microtime(true);
     
-    $delta = $scriptStopTime-$scriptStartTime;
+    $delta = number_format( $scriptStopTime-$scriptStartTime, 3 );
     
     echo "<hr>";
     echo "request finished in ".$delta."sec<br>";

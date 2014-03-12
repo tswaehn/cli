@@ -10,9 +10,18 @@ open
 - x_article : 
   - datum und version übernehmen
   - name bereinignen, ggf. andere felder benutzen und aus namen ausschneiden
-    
- 
 
+- Sortieren der Fertigungsliste nach Spalte
+- Felder im Artikel ergänzen "bem", "Ken", bstnr, ftext, vbezbspr, vkbezbspr
+- Doppelte Medien sollten vermieden werden: 7500-65401 
+- Leerzeichen in Medien funktionieren nicht : 4500-00075
+- Umlaute in medien : http://tank/abas/?action=article&article_id=21787
+
+
+2014 mar.11 - v0.2.0
+  - Beispieltext für Suche eingefügt
+  - Beim klicken auf das PDF sollte sich das orig. PDF öffnen.  
+ 
 2014 feb. 23
   fixed
     - EDP import blockiert aktuell an "für" in "name" bzw. "sucherw"

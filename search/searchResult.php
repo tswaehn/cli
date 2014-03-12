@@ -40,7 +40,7 @@
       $result = mySearchInTable(DB_ARTICLE, $search );
       $end=microtime(true);
       
-      $diff = $end-$start;      
+      $diff = number_format( $end-$start, 3) ;      
       $count=$result->rowCount();
       
       if (!empty($result)){

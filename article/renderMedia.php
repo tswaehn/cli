@@ -28,7 +28,8 @@
 	
 	if ($ignore==0){
 	  // replace mapped drive by unc
-	  $name=str_ireplace("W:\\", "\\\\HSEB-SV2\\Daten\\", $name);
+	  //$name=str_ireplace("W:\\", "\\\\HSEB-SV2\\Daten\\", $name);
+	  $name=str_ireplace("W:\\", "\\\\192.168.0.241\\Daten\\", $name);
 	  $media[] = $name;
 	}
 	
@@ -45,7 +46,7 @@
     $name = basename( $file );
     //$dir = dirname( $file );
     
-    disp('<a href="./article/download.php?file='.$file.'">'.$name.'</a>');
+    disp('<a href="./article/download.php?file='.urlencode($file).'">'.$name.'</a>');
   
   }
 
@@ -125,14 +126,17 @@
       }
     }
     
+    // unique
+    $images = array_unique( $images );
+    
     $count=sizeof($images);
-      if ($count > 0){
+    if ($count > 0){
       $image_width = $max_width / $count;
       if ($image_width < $min_width){
 	$image_width=$min_width;
       }
       foreach ($images as $image){
-	$file_link='./article/download.php?file='.$image;
+	$file_link='./article/download.php?file='.urlencode($image);
 	
 	echo ('<a href="'.$file_link.'"><img src="'.$file_link.'" width="'.$image_width.'"  ></a>');
       }
@@ -147,8 +151,9 @@
 	if (in_arrayi( $info, array("pdf"))){
 	  echo "converting pdf2jpg";
 	  $found_something_to_display=1;
-	  $file_link='./article/pdfToJpeg.php?file='.$item;
-	  echo ('<a href="'.$file_link.'"><img src="'.$file_link.'" width="'.$max_width.'"  ></a>');
+	  $file_dllink='./article/download.php?file='.urlencode($item);	  
+	  $file_link='./article/pdfToJpeg.php?file='.urlencode($item);
+	  echo ('<a href="'.$file_dllink.'"><img src="'.$file_link.'" width="'.$max_width.'"  ></a>');
 	  break;
 	}	
       }

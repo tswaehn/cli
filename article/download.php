@@ -4,7 +4,7 @@
   extract( $_POST, EXTR_PREFIX_ALL, "url" );
 
   if (isset( $url_file )){
-    $filename = $url_file;
+    $filename = urldecode($url_file);
     
     if(file_exists($filename)) {
   
