@@ -55,7 +55,7 @@
     
     echo "<hr>";
     echo "request finished in ".$delta."sec<br>";
-	echo "Glaskugel ".BUILD_NR;
+	echo 'Glaskugel <a href="history.txt" target="_blank">'.BUILD_NR.'</a>';
   
   }
   

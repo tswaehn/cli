@@ -1,28 +1,40 @@
 
+...::::::
+          A B A S -- G l a s K u g e l
+				       :::::::....
+      
+      
     
-open    
-- einfluss von "flistestd" in "Fertigungsliste:Fertigungsliste" unklar
-- "2058-17090" bg-msu hat zwei stücklisten
+offene Punkte
 
-- import von arbeitsgängen
-- import von interner fertigung aus "Betr-Auftrag:Betriebsaufträge"
+  - Sortieren der Fertigungsliste nach Spalte
+  - Felder im Artikel ergänzen "bem", "Ken", bstnr, ftext, vbezbspr, vkbezbspr
+  - Doppelte Medien sollten vermieden werden: 7500-65401 (gleichzeitig ein Pfad+ein Bildlink)
+  - Leerzeichen in Medien funktionieren nicht : 4500-00075
+  - Umlaute in medien : 7500-65101 ( http://tank/abas/?action=article&article_id=21787 )
+  - Text nach @@ entfernen
+  - Fertigungsliste: Arbeitsgänge und Fertigungsmittel mit anzeigen
+  - Suchergebnisse nach Spalten sortierbar machen
 
-- x_article : 
-  - datum und version übernehmen
-  - name bereinignen, ggf. andere felder benutzen und aus namen ausschneiden
+  - einfluss von "flistestd" in "Fertigungsliste:Fertigungsliste" unklar
+  - "2058-17090" bg-msu hat zwei stücklisten
 
-- Sortieren der Fertigungsliste nach Spalte
-- Felder im Artikel ergänzen "bem", "Ken", bstnr, ftext, vbezbspr, vkbezbspr
-- Doppelte Medien sollten vermieden werden: 7500-65401 
-- Leerzeichen in Medien funktionieren nicht : 4500-00075
-- Umlaute in medien : http://tank/abas/?action=article&article_id=21787
+  - import von arbeitsgängen
+  - import von interner fertigung aus "Betr-Auftrag:Betriebsaufträge"
 
+  - x_article : 
+    - datum und version übernehmen
+    - name bereinignen, ggf. andere felder benutzen und aus namen ausschneiden
+
+  
 
 2014 mar.11 - v0.2.0
+  - Angezeigte „Such“ Sekunden sinnvoll runden => Ausführungszeit eingekürzt auf 3Stellen nach dem Komma
   - Beispieltext für Suche eingefügt
+  - Suchbegriff „bnc kabel“ entfernen
   - Beim klicken auf das PDF sollte sich das orig. PDF öffnen.  
  
-2014 feb. 23
+2014 feb. 23 - v0.0.0
   fixed
     - EDP import blockiert aktuell an "für" in "name" bzw. "sucherw"
     - Dispo falsch interpretiert

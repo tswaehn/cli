@@ -6,6 +6,8 @@
   if (isset( $url_file )){
     $filename = urldecode($url_file);
     
+    $filename = utf8_decode( $url_file );// php file access is always ISO-8859-1 
+    
     if(file_exists($filename)) {
   
 	header('Content-Description: File Transfer');

@@ -52,7 +52,7 @@
 
   function dir_contents_recursive($dir, &$result=array() ) {
       // open handler for the directory
-      $iter = new DirectoryIterator($dir);
+      $iter = new DirectoryIterator(  utf8_decode( $dir ) ); // php file access is always ISO-8859-1 
 
       foreach( $iter as $item ) {
 	  // make sure you don't try to access the current dir or the parent
@@ -62,7 +62,7 @@
 			  dir_contents_recursive("$dir/$item", $result);
 		  } else {
 			  // print files
-			  $file =  $dir . "/" .$item->getFilename();
+			  $file =  $dir . "/" .utf8_encode( $item->getFilename() );
 			  $result[] = $file;
 		  }
 	  }
@@ -79,7 +79,7 @@
     
     $i=0;
     foreach ( $result as $file ){
-      renderMediaFile( $file );
+      renderMediaFile(  $file  );
       
       // limit results
       $i++;
@@ -101,7 +101,8 @@
     $min_width=40;
 
     foreach ($media as $item ){
-      if (is_dir($item)){
+      // php file access is always ISO-8859-1 
+      if (is_dir( utf8_decode( $item))){
 	$result=dir_contents_recursive( $item );
 	foreach ($result as $newitem){
 	  $media[] = $newitem;
@@ -113,7 +114,7 @@
     
     foreach ($media as $item ){
       
-      if (is_file($item)){
+      if (is_file( utf8_decode( $item ))){ // php file access is always ISO-8859-1 
 	$info = pathinfo( $item );
 	
 	if (isset($info["extension"])){
@@ -183,9 +184,9 @@
 
     // render each item
     foreach ($media as $item){
-      if (is_file( $item )){
+      if (is_file( utf8_decode($item) )){	// php file access is always ISO-8859-1 
 	renderMediaFile( $item );
-      } else if (is_dir( $item )){
+      } else if (is_dir( utf8_decode( $item ))){	// php file access is always ISO-8859-1 
 	renderMediaDir( $item );
       } else {
 	disp("non-existent media ".$item );
