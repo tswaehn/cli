@@ -37,8 +37,6 @@
 
   // -------------------
   
-  connectToDb();  
-
   echo '<div id="searchform">';
     
     $abas_nr = getUrlParam("search_abas_nr");

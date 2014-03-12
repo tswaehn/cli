@@ -3,8 +3,6 @@
 <?php
   
 
-   
-  connectToDb();
     $abas_nr = getUrlParam("search_abas_nr");
     
     if (!empty($abas_nr)){

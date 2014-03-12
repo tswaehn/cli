@@ -21,10 +21,11 @@
     include('./article/renderVerwendung.php');
     include('./article/renderArticle.php');    
 
-  include('./lib/getRemoteInfo.php');
+    include('./stats/getRemoteInfo.php');
  
   $action = getUrlParam("action");
 
+  connectToDb();
   
   switch ($action){	
     case "raw": 
@@ -41,6 +42,12 @@
 		$title="oVerdRive Search";
 		$script="./overdrive/search.php";
 		break;
+		
+    case "stats":
+		$title="Statistik";
+		$script="./stats/stats.php";
+		break;
+		
     default:
 	      $title="Suchen";
 	      $script="./search/search.php";

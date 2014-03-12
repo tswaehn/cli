@@ -16,6 +16,8 @@
   define( "DB_PRODUCTION_LIST", "gk_production_list" );
   define( "DB_DICT", "gk_dict");
   define( "DB_DICT_RANK", "gk_dict_rank" );  
+  define( "DB_CLIENT_ACCESS", "gk_client_access" );
+  
   
   include( 'config.txt');
 

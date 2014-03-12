@@ -65,8 +65,6 @@
   if ($search != ''){
     
 
-    connectToDb();
-    
     switch ($mode){
       case 'indexed':
 	    indexedSearch($search);

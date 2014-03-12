@@ -18,7 +18,6 @@
 	    echo '<a href="?action=search&textindex=1">create index</a>';
 	    $textindex = getUrlParam( "textindex" );
 	    if ($textindex){
-	      connectToDb();
 	      createFullTextIndex();
 	    }
 	    break;
