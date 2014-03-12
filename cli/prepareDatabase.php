@@ -248,7 +248,16 @@
       if (is_numeric($key)){
 	continue;
       }
+
+      echo "hier gibt es noch was zu tun";
       
+      die();
+      /*
+      \todo
+      datum entfernen
+      zahlen entfernen
+      leere felder entfernen
+      */
       switch ($key){
 	case "article_id":
 	    $str = "";
@@ -286,7 +295,7 @@
     //print_r( $dict_str );
     
     // split by separator
-    $dict=preg_split( "/#/", $dict_str, -1, PREG_SPLIT_NO_EMPTY );
+    $dict=preg_split( "/ /", $dict_str, -1, PREG_SPLIT_NO_EMPTY );
     
     // remove double entries
     $dict = array_unique( $dict );
@@ -405,10 +414,10 @@
   
   function prepareDatabase(){
     
-    dbCreateTableArticle();
+    //dbCreateTableArticle();
     dbCreateDict();
-    dbCreateRank();
-    dbCreateProductionList();
+    //dbCreateRank();
+    //dbCreateProductionList();
   }
 
 
