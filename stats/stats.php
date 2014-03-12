@@ -34,7 +34,7 @@
     
     $table = DB_CLIENT_ACCESS;
     
-    $sql = "SELECT ip,host,info,count(*) as cnt FROM ".q($table)." WHERE 1 GROUP BY `ip`,`info` ORDER BY cnt;";
+    $sql = "SELECT ip,host,info,count(*) as cnt FROM ".q($table)." WHERE 1 GROUP BY `ip`,`info` ORDER BY ip ASC, cnt DESC";
     $result = dbExecute( $sql );
 
     echo '<table id="stats">';
@@ -45,14 +45,16 @@
 	echo "<th> Access Count </th>";	
     echo "</tr>";
     
-    foreach ($result as $item ){
-      echo "<tr>";
-	echo "<td>".$item["ip"]."</td>";
-	echo "<td>".$item["host"]."</td>";
-	echo "<td>".$item["info"]."</td>";	
-	echo "<td>".$item["cnt"]."</td>";	
-      echo "</tr>";
-    
+    if ($result->rowCount() > 0){
+      foreach ($result as $item ){
+	echo "<tr>";
+	  echo "<td>".$item["ip"]."</td>";
+	  echo "<td>".$item["host"]."</td>";
+	  echo "<td>".$item["info"]."</td>";	
+	  echo "<td>".$item["cnt"]."</td>";	
+	echo "</tr>";
+      
+      }
     }
     echo "</table>";
     
