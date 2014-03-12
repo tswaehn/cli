@@ -28,6 +28,6 @@
   
  
   
-  <?php finish(); ?>
+  <?php footer(); ?>
  
 </html>

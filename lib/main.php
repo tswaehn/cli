@@ -21,6 +21,7 @@
     include('./article/renderVerwendung.php');
     include('./article/renderArticle.php');    
 
+  include('./lib/getRemoteInfo.php');
  
   $action = getUrlParam("action");
 
@@ -47,7 +48,9 @@
   }
   
   
-  function showScriptTime(){
+  
+  function footer(){
+  
     global $scriptStartTime;
     $scriptStopTime=microtime(true);
     
@@ -57,10 +60,11 @@
     echo "request finished in ".$delta."sec<br>";
 	echo 'Glaskugel <a href="history.txt" target="_blank">'.BUILD_NR.'</a>';
   
-  }
-  
-  function finish(){
-    showScriptTime();
+    echo "<p>";
+    
+    $info=getRemoteInfos();
+    
+    print_r( $info );
     
   }
   
