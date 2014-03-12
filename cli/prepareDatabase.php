@@ -222,10 +222,10 @@
     // replace [-10-] "asfasfas[-10-]klajflaksjdfl"
     $string = preg_replace( "/\[\-10\-\]/", " ", $string );
 
-    // replace zeichn "004.00-1600.026F-03.01"
+    // remove zeichn "004.00-1600.026F-03.01"
     $string = preg_replace( "/\d{3}\.\d{2}.*\d{2}\.\d{2}/", "", $string );
 
-    // replace zeiss "475820-0115-000/01" or "475610-0436-000"
+    // remove zeiss "475820-0115-000/01" or "475610-0436-000"
     $string = preg_replace( "/\d{6}\-\d{4}\-\d{3}|\/\d{2}/", "", $string );
     
     // replace special chars/unwanted chars by separator
@@ -249,20 +249,17 @@
 	continue;
       }
 
-      echo "hier gibt es noch was zu tun";
-      
-      die();
       /*
       \todo
-      datum entfernen
-      zahlen entfernen
       leere felder entfernen
       */
       switch ($key){
 	case "article_id":
+	case "erfass":	
+	case "stand":
 	    $str = "";
 	    break;
-	    
+	
 	case "nummer":
 	    $str = $item["nummer"];
 	    break;
@@ -414,10 +411,10 @@
   
   function prepareDatabase(){
     
-    //dbCreateTableArticle();
+    dbCreateTableArticle();
     dbCreateDict();
-    //dbCreateRank();
-    //dbCreateProductionList();
+    dbCreateRank();
+    dbCreateProductionList();
   }
 
 

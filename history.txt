@@ -33,6 +33,7 @@ offene Punkte
   - Beim klicken auf das PDF sollte sich das orig. PDF öffnen.  
   - fix: Leerzeichen in Medien funktionieren nicht : 4500-00075
   - fix: Umlaute in medien : 7500-65101 ( http://tank/abas/?action=article&article_id=21787 )
+  - release notes und build nr 
  
 2014 feb. 23 - v0.0.0
   fixed
