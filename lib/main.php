@@ -70,7 +70,7 @@
     $delta = number_format( $scriptStopTime-$scriptStartTime, 3 );
     
     echo "request finished in ".$delta."sec<br>";
-	echo 'Glaskugel <a href="history.txt" target="_blank">'.BUILD_NR.'</a>';
+	echo 'Glaskugel <a href="./lib/history.php" target="_blank">'.BUILD_NR.'</a>';
   
     
   }
