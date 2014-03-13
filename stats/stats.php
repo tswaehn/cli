@@ -34,6 +34,16 @@
     
     $table = DB_CLIENT_ACCESS;
     
+    // ---- header
+    $sql = "SELECT MIN(`timestamp`) AS st,MAX(`timestamp`) AS en FROM ".q($table)." WHERE 1";
+    $result = dbExecute( $sql );
+    if ($result->rowCount() > 0){
+      $row=$result->fetch();
+      echo "interval ".$row["st"]." to ".$row["en"]."<p>";
+    }
+    
+    
+    // ---- table
     $sql = "SELECT ip,host,info,count(*) as cnt FROM ".q($table)." WHERE 1 GROUP BY `ip`,`info` ORDER BY ip ASC, cnt DESC";
     $result = dbExecute( $sql );
 

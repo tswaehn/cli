@@ -413,8 +413,8 @@
     
     dbCreateTableArticle();
     dbCreateDict();
-    dbCreateRank();
     dbCreateProductionList();
+    dbCreateRank();
   }
 
 

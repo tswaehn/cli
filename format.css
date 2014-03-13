@@ -74,3 +74,13 @@ a:active {
   padding:10px; 
   margin:10px
 }
+
+
+#down {
+  height:500px;
+  margin:50px;
+  padding-top:200px;
+  border: thin solid gray;
+  text-align:center;
+
+}

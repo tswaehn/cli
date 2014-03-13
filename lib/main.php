@@ -5,6 +5,7 @@
   
   include('./lib/lib.php');
   include('./cli/dbConnection.php');  
+  include('./lib/siteDown.php');
       
   include('./lib/jsUpdate.php');
 
@@ -59,19 +60,18 @@
   function footer(){
   
     global $scriptStartTime;
+
+    echo "<hr>";
+    
+    getRemoteInfos();
+    
     $scriptStopTime=microtime(true);
     
     $delta = number_format( $scriptStopTime-$scriptStartTime, 3 );
     
-    echo "<hr>";
     echo "request finished in ".$delta."sec<br>";
 	echo 'Glaskugel <a href="history.txt" target="_blank">'.BUILD_NR.'</a>';
   
-    echo "<p>";
-    
-    $info=getRemoteInfos();
-    
-    print_r( $info );
     
   }
   
