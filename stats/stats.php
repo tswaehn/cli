@@ -43,6 +43,28 @@
     }
     
     
+    // ---- users per day
+    $sql = "SELECT DATE(`timestamp`) as date,count(*) AS cnt FROM ".q($table)." WHERE 1 GROUP BY `date` ORDER BY `date` DESC";
+    $result = dbExecute( $sql );
+    echo '<table id="stats">';
+    echo "<tr>";
+    	echo "<th> Date </th>";
+	echo "<th> Access Count </th>";	
+    echo "</tr>";
+    
+    if ($result->rowCount() > 0){
+      foreach ($result as $item ){
+	echo "<tr>";
+	  echo "<td>".$item["date"]."</td>";
+	  echo "<td>".$item["cnt"]."</td>";	
+	echo "</tr>";
+      
+      }
+    }
+    echo "</table>";
+    
+    echo "<p>";
+    
     // ---- table
     $sql = "SELECT ip,host,info,count(*) as cnt FROM ".q($table)." WHERE 1 GROUP BY `ip`,`info` ORDER BY ip ASC, cnt DESC";
     $result = dbExecute( $sql );
