@@ -25,7 +25,11 @@
     include('./stats/getRemoteInfo.php');
  
   $action = getUrlParam("action");
-
+  if (empty($action)){
+    $action="search";
+  }
+  
+    
   connectToDb();
   
   switch ($action){	
