@@ -9,7 +9,7 @@
     if (tableExists( $table ) == true ){
       removeTable( $table );
     }
-    $new_table_fields = array( "id", "timestamp", "ip", "host", "info" );
+    $new_table_fields = array( "id", "timestamp", "ip", "host", "info", "request_time" );
     
     $fieldinfo["id"]["type"]=INDEX;
     
@@ -23,6 +23,8 @@
 
     $fieldinfo["info"]["type"]=ASCII;
     $fieldinfo["info"]["size"]=50;
+
+    $fieldinfo["request_time"]["type"]=FLOAT;
     
     createTable( $table, $new_table_fields, $fieldinfo );
       

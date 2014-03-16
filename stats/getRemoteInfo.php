@@ -7,6 +7,16 @@
  * by tswaehn (http://sourceforge.net/users/tswaehn/)
  */
  
+  $clientInfo = "";
+  
+  function addClientInfo( $str ){
+    global $clientInfo;
+    
+    $clientInfo.=$str.";";
+    
+  
+  }
+  
   function getRemoteIP(){
 
 	  if (isset($_SERVER['HTTP_X_REMOTE_ADDR'])) {
@@ -20,21 +30,21 @@
 
   
 
-  function dbAddClientAccess( $ip, $host, $info = "" ){
+  function dbAddClientAccess( $ip, $host, $info = "", $duration ){
     
     $table = DB_CLIENT_ACCESS;
     
     // INSERT INTO table ( `id` ,`timestamp` ,`ip` ,`desc`) 
     //		VALUES (NULL ,CURRENT_TIMESTAMP , '".$ip."', NULL);";
-    $sql = "INSERT INTO ".q($table)." ( `timestamp`, `ip`, `host`, `info` ) ";
-    $sql.= "VALUES ( CURRENT_TIMESTAMP, '".$ip."', '".$host."', '".$info."' );";
+    $sql = "INSERT INTO ".q($table)." ( `timestamp`, `ip`, `host`, `info`, `request_time` ) ";
+    $sql.= "VALUES ( CURRENT_TIMESTAMP, '".$ip."', '".$host."', '".$info."', ".$duration." );";
       
     dbExecute( $sql );
     
   
   }
   
-  function getRemoteInfos(){
+  function getRemoteInfos( $duration ){
     
     if (isset($_SERVER['HTTP_X_REMOTE_ADDR'])) {
       $ip = $_SERVER['HTTP_X_REMOTE_ADDR'];
@@ -48,8 +58,9 @@
     $info["ip"] = $ip;
     $info["host"] = $host;
     
-    global $action;
-    dbAddClientAccess( $ip, $host, $action );
+    global $clientInfo;
+    
+    dbAddClientAccess( $ip, $host, $clientInfo, $duration );
     
     return $info;    
   }

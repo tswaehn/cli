@@ -18,6 +18,9 @@
   define( "DB_DICT_RANK", "gk_dict_rank" );  
   define( "DB_CLIENT_ACCESS", "gk_client_access" );
   
+  // allowed characters for any ASCII text field formated as regex for replace
+  define( "ALLOWED_ASCII", "/[^A-Za-z0-9.\-\ \@\ö\ä\ü\Ö\Ä\Ü\ß]/" );
+  
   
   include( 'config.txt');
 

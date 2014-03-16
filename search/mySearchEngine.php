@@ -1,4 +1,17 @@
 <?php
+
+  function searchForm( $search ){
+    
+    echo '<form action="?action=search" method="POST">
+		    <span style="margin-right:10px">Suchbegriff </span>
+	  <input type="edit" name="search" value="'.$search.'" size="40">
+	  <input type="submit" value="suchen">
+	  </form>';
+    echo 'Beispiel: <span style="color:grey;font-weight:bold">bnc kabel</span>';
+    echo ' oder <span style="color:grey;font-weight:bold">lemo stecker</span> ';
+    
+  }
+  
   
   function createLike( $cols, $value ){
     
@@ -82,15 +95,67 @@
     
     lg('exec time is '.($timediff) );
 
-    lg('found '.$result->rowCount().' items' );
+    if (!empty($result)){
+      lg('found '.$result->rowCount().' items' );
+    }
     
     return $result;
 
   }
 
 
+  function mySearch( $search ){
+      
+      $count = 0;
+      
+      $start=microtime(true);
+      $result = mySearchInTable(DB_ARTICLE, $search );
+      $end=microtime(true);
+      
+      $diff = number_format( $end-$start, 3) ;      
+      
+      
+      if (!empty($result)){
+	$count=$result->rowCount();
 
+	echo "found ".$count." results in ".$diff."secs";
+	foreach ($result as $item){
+	
+	  echo '<div id="search_item">';
+	    echo shortArticle( $item );
+	  echo '</div>';
+	}
+      } else {
+	
+	echo "failed to receive data";
+      }
 
+      addClientInfo( $search );
+      addClientInfo("res ".$count." ".$diff );
+      
+  }
+  
+  
+  // ---
+  
+  $search = getUrlParam('search');
+  
+
+  if ($search ==''){
+    $search ='';
+  }
+
+  $search = preg_replace( ALLOWED_ASCII, " ", $search );
+  $search = trim( $search );
+  
+  echo '<div id="searchform">';
+  searchForm($search);
+  echo '</div>';
+    
+  echo '<div id="searchresult">';
+  mySearch($search);
+  echo '</div>';
+  
 
 
 ?>

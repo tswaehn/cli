@@ -1,6 +1,6 @@
 <?php
   
-  define( "BUILD_NR", "v0.2.0");
+  define( "BUILD_NR", "v0.2.1");
   $scriptStartTime = microtime(true);
   
   include('./lib/lib.php');
@@ -10,7 +10,6 @@
   include('./lib/jsUpdate.php');
 
     include('./search/dbSearch.php');
-    include('./search/mySearchEngine.php');
     
     include('./article/dbArticle.php');
     include('./article/dbFertigung.php');
@@ -31,6 +30,8 @@
   
     
   connectToDb();
+  
+  addClientInfo( $action );
   
   switch ($action){	
     case "raw": 
@@ -55,7 +56,7 @@
 		
     default:
 	      $title="Suchen";
-	      $script="./search/search.php";
+	      $script="./search/mySearchEngine.php";
   
   }
   
@@ -67,11 +68,14 @@
 
     echo "<hr>";
     
-    getRemoteInfos();
+
     
     $scriptStopTime=microtime(true);
+    $duration = $scriptStopTime-$scriptStartTime;
+
+    getRemoteInfos($duration);
     
-    $delta = number_format( $scriptStopTime-$scriptStartTime, 3 );
+    $delta = number_format( $duration, 3 );
     
     echo "request finished in ".$delta."sec<br>";
 	echo 'Glaskugel <a href="./lib/history.php" target="_blank">'.BUILD_NR.'</a>';

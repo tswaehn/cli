@@ -2,6 +2,23 @@
   
 
   
+  
+  function indexedSearch( $search ){
+      $result = searchInTableX('Teil:Artikel', $search );
+      echo '</pre>';    
+      
+      $count=$result->rowCount();
+      
+      echo "found ".$count." results";
+      foreach ($result as $item){
+      
+	echo '<div id="item" style="border: thin solid blue; padding:10px; margin:10px">';
+	  //echo shortArticle( $item );
+	  echo $item["score"]. " ".$item["nummer"]." ".$item["such"]." ".$item["sucherw"];
+
+	echo '</div>';
+      }  
+  }
 
   
   // search for first word in query exact match
