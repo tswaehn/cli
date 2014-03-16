@@ -19,6 +19,14 @@ byrows=0
 sortasc=1
 search-and=1
 
+[Arbeitsgang:Arbeitsgang]
+fieldlist=id,nummer,such,name,aschein,hinweis
+sortby=nummer
+maxdatasize=100000
+byrows=0
+sortasc=1
+search-and=1
+
 [Einkauf:Bestellung]
 fieldlist=id,nummer,such,betreff,art,artex,artikel,tename,ls,re,aumge,planmge,bem,ysenddat,ysendusr,lief
 sortby=nummer
@@ -36,7 +44,7 @@ sortasc=1
 search-and=1
 
 [Betr-Auftrag:Betriebsaufträge]
-fieldlist=id,nummer
+fieldlist=id,nummer,artikel,anzahl,elanzahl,mge,tabnr,zn,erfass,stand,aezeichen,ykomplatz
 sortby=nummer
 maxdatasize=100000
 byrows=1
@@ -44,13 +52,11 @@ sortasc=1
 search-and=1
 
 
-
-
-[Inventur:Zähllistenkopf]
-fieldlist=id,nummer,such
+[Teil:Fertigungsmittel]
+fieldlist=nummer,such,name,platz
 sortby=nummer
-maxdatasize=50
-byrows=1
+maxdatasize=100000
+byrows=0
 sortasc=1
 search-and=1
 
