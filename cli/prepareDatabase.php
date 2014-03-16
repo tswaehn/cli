@@ -454,11 +454,16 @@
 	echo $k." of ".$count;
       }
 
+      //dbAddToDict( $item["article_id"], $dict );
       
       $dict = dictSplit( $item );
-
-      //dbAddToDict( $item["article_id"], $dict );
-      $dataSet[] = $dict;      
+      $article_id = $item["article_id"];
+      
+      foreach ($dict as $value){
+	$dataSet[] = array( $value, $article_id);      
+      }
+      
+      
     
     
     }
@@ -515,10 +520,10 @@
   
   function prepareDatabase(){
     
-    //dbCreateTableArticle();
-    //dbCreateProductionList();
+    dbCreateTableArticle();
+    dbCreateProductionList();
     dbCreateDict();
-    //dbCreateRank();
+    dbCreateRank();
   }
 
 
