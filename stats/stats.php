@@ -46,8 +46,8 @@
     
     
     // ---- users per day
-    //$sql = "SELECT DATE(`timestamp`) as date,count(*) AS cnt FROM ".q($table)." WHERE 1 GROUP BY `date` ORDER BY `date` DESC";
-    $sql = "SELECT DATE(timestamp) as date,max(request_time) AS rmax, min(request_time) AS rmin, count(*) AS cnt FROM ".q($table)." WHERE 1 GROUP BY ip,DATE(timestamp) ORDER BY date DESC, ip ASC";
+    $sql = "SELECT DATE(`timestamp`) as date,count(*) AS cnt FROM ".q($table)." WHERE 1 GROUP BY `date` ORDER BY `date` DESC";
+    //$sql = "SELECT DATE(timestamp) as date,max(request_time) AS rmax, min(request_time) AS rmin, count(*) AS cnt FROM ".q($table)." WHERE 1 GROUP BY ip,DATE(timestamp) ORDER BY date DESC, ip ASC";
     $result = dbExecute( $sql );
     echo '<table id="stats">';
     echo "<tr>";
@@ -85,13 +85,15 @@
     $date ="";
     if ($result->rowCount() > 0){
       foreach ($result as $item ){
-	if ($item["date"] != $date){
-	  $date = $item["date"];
-	} else {
-	  $date = "";
-	}
 	echo "<tr>";
-	  echo "<td>".$date."</td>";
+
+	  // display one date for the day only
+	  if ($item["date"] != $date){
+	    $date = $item["date"];
+	    echo "<td>".$item["date"]."</td>";
+	  } else {
+	    echo "<td></td>";
+	  }
 	  echo "<td>".$item["ip"]."</td>";
 	  echo "<td>".$item["host"]."</td>";
 	  echo "<td>".$item["cnt"]."</td>";	
