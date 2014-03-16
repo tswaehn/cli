@@ -13,7 +13,7 @@
     $na="(aktuell nicht verfügbar)";
     
     disp( "Erstellt ".$article["erfass"]." von ".$article["yersteller"] );
-    disp( "Änderung ".$article["stand"] );
+    disp( "Änderung ".$article["stand"]." von ".$article["zeichen"] );
     //disp( "Version ".$na );
     ediv();
   }

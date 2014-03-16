@@ -17,7 +17,9 @@
 		     "ypdf1", "ydxf", "yxls", "ytpdf", "ytlink", "bild", "bbesch", "foto",
 		     "fotoz", "catpics", "catpicsz", "catpiclz", "caturl",
 		     
-		     "erfass", "stand"
+		     "erfass", "stand", "zeichen",
+		     
+		     "bem", "kenn", "bstnr", "vbezbspr", "vkbezbspr", "ftext"
 		     );
 
     $fieldinfo["article_id"]["type"]=INDEX;
@@ -101,8 +103,16 @@
     $fieldinfo["caturl"]["type"]=ASCII;        
 
     $fieldinfo["erfass"]["type"]=ASCII;    
-    $fieldinfo["stand"]["type"]=ASCII;        
-    
+    $fieldinfo["stand"]["type"]=ASCII;     
+    $fieldinfo["zeichen"]["type"]=ASCII;     
+
+    $fieldinfo["bem"]["type"]=ASCII;     
+    $fieldinfo["kenn"]["type"]=ASCII;     
+    $fieldinfo["bstnr"]["type"]=ASCII;     
+    $fieldinfo["vbezbspr"]["type"]=ASCII;     
+    $fieldinfo["vkbezbspr"]["type"]=ASCII;     
+    $fieldinfo["ftext"]["type"]=ASCII;     
+
     createTable( $table, $new_table_fields, $fieldinfo );
 
     $copy_fields = array( "nummer", "such", "name", "ebez", 
@@ -111,7 +121,9 @@
 		     "ve", "fve", "zeichn", "lief", "lief2", "yersteller", "yzeissnr",
 		     "ypdf1", "ydxf", "yxls", "ytpdf", "ytlink", "bild", "bbesch", "foto",
 		     "fotoz", "catpics", "catpicsz", "catpiclz", "caturl",
-		     "erfass", "stand"
+		     "erfass", "stand","zeichen",
+		     "bem", "kenn", "bstnr", "vbezbspr", "vkbezbspr", "ftext"
+		     
 		     );
 		     
     $fieldStr = "`".implode( "`,`", $copy_fields )."`";
@@ -412,8 +424,8 @@
   function prepareDatabase(){
     
     dbCreateTableArticle();
-    dbCreateDict();
     dbCreateProductionList();
+    dbCreateDict();
     dbCreateRank();
   }
 

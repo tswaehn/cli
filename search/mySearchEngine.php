@@ -127,7 +127,7 @@
 	}
       } else {
 	
-	echo "failed to receive data";
+	//echo "empty result";
       }
 
       addClientInfo( $search );
