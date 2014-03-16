@@ -23,14 +23,14 @@ offene Punkte
   - import von interner fertigung aus "Betr-Auftrag:Betriebsaufträge"
 
   - article : 
-    - Kennzeichen anzeigen
 
 2014 mar.16 - v0.2.1
   - Bei der Eingabe der Suche/Artikel Nummer ggf. trimmen oder filtern "fatal error: .... on line 85"
-  - [ga] dokufeld für pdf fehlt: Feld “bbesch“ bsp. 4500-00222 W:\Datenblaetter\7400-00067_Datasheet_LP67.pdf  
+  - [db-update] dokufeld für pdf fehlt: Feld “bbesch“ bsp. 4500-00222 W:\Datenblaetter\7400-00067_Datasheet_LP67.pdf  
+  - datum und letzte änderung von artikeln korrekt angezeigt  
+  - Artikel zeigt Kennzeichen an
   
   sollte rein:
-  - datum und version von artikeln korrekt angezeigt
   - Felder im Artikel ergänzen: bem, ken, bstnr, ftext, vbezbspr, vkbezbspr
   
 

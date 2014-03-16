@@ -162,6 +162,7 @@
   function insertIntoTable( $table, $fields, $lines ){
     global $pdo;
     
+    
     $field_str ="";
     $last = end($fields);
     foreach ($fields as $field){
@@ -180,11 +181,17 @@
 	$placeholder .= ",";
       }
     }
+
+    $total_count=count($lines);
+    lg( "inserting ".$total_count." data sets");
+    $step_size = $total_count / 100;
     
+    $total=0;
+    $k=0;
     // query
     try {
       $sql = "INSERT INTO ".q($table)." (".$field_str.") VALUES (".$placeholder.")";
-      //lg($sql);
+      lg($sql);
       
       $q = $pdo->prepare($sql);
       
@@ -198,7 +205,14 @@
 	}
 	
 	$q->execute( $data );
-      
+    
+	$total++;
+	$k++;
+	if ($k>=$step_size){
+	  $k=0;
+	  $percnt = $total/$total_count * 100;
+	  lg( "insert ".$percnt."% (".$total."/".$total_count.")" );
+	}
       }
     } catch(PDOException $e) {
       lg( "something went wrong while inserting data");

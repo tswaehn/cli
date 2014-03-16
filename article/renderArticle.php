@@ -9,6 +9,15 @@
   
   }
   
+  function renderKennzeichen( $kenn ){
+    $str = "";
+      
+    $str .= $kenn;
+    
+    
+    return $str;
+  }
+  
   function shortArticle( $article ){
     $link = "?action=article&article_id=".$article["article_id"];
     
@@ -19,7 +28,8 @@
     $text .= ' <span id="desc">';
 	$text .=  implode( $strings, " ");
 	$text .= ' rank:'.$article["rank"];
-    $text .= ' <br>'.renderBestand( $article ) .'</span>';
+    $text .= ' <br>'.renderBestand( $article )." ".renderKennzeichen( $article["kenn"] );
+    $text .= '</span>';
     $text .= '<br>';
     
     return $text ;
