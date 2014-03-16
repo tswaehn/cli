@@ -433,6 +433,9 @@
     $k=0;
     
     $outputCount=10;
+    
+    $dataSet = array();
+    
     foreach ($result as $item ){
     
       $i++;
@@ -454,12 +457,14 @@
       
       $dict = dictSplit( $item );
 
-      dbAddToDict( $item["article_id"], $dict );
-      
+      //dbAddToDict( $item["article_id"], $dict );
+      $dataSet[] = $dict;      
     
     
     }
     
+    $fields = array( "str", "article_id" );
+    insertIntoTable( DB_DICT, $fields, $dataSet );
     
     
     $endtime = microtime(true); 
@@ -511,8 +516,8 @@
   function prepareDatabase(){
     
     //dbCreateTableArticle();
-    dbCreateProductionList();
-    //dbCreateDict();
+    //dbCreateProductionList();
+    dbCreateDict();
     //dbCreateRank();
   }
 
