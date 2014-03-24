@@ -1,6 +1,6 @@
 <?php
   
-  define( "BUILD_NR", "v0.2.1");
+  define( "BUILD_NR", "v0.2.2");
   $scriptStartTime = microtime(true);
   
   include('./lib/lib.php');
@@ -80,8 +80,9 @@
     $delta = number_format( $duration, 3 );
     
     echo "request finished in ".$delta."sec<br>";
-	echo 'Glaskugel <a href="./lib/history.php" target="_blank">'.BUILD_NR.'</a>';
-  
+    echo 'Glaskugel <a href="./lib/history.php" target="_blank">'.BUILD_NR.'</a>';
+    echo " - ";
+    echo "letzter sync ".getConfigdb("lastSync");
     
   }
   
