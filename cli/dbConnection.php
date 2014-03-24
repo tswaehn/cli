@@ -12,6 +12,7 @@
   define( "INT", 4 );
   
   // table names
+  define( "DB_CONFIG", "gk_config" );
   define( "DB_ARTICLE", "gk_article" );
   define( "DB_PRODUCTION_LIST", "gk_production_list" );
   define( "DB_DICT", "gk_dict");
@@ -95,6 +96,26 @@
     return $result;  
   }
   
+  function setConfigDb( $key, $value ){
+    
+    $sql = "INSERT INTO ".q(DB_CONFIG)." (`key`,`value`) VALUES ('".$key."', '".$value."') ";
+    $sql .= "ON DUPLICATE KEY UPDATE `key`='".$key."', `value`='".$value."'";
+    dbExecute( $sql );
+  }
+  
+  function getConfigDb( $key ){
+    $value = "";
+    
+    $sql = "SELECT `value` FROM ".q(DB_CONFIG)." WHERE `key`='".$key."' LIMIT 1";
+    $result = dbExecute( $sql );
+    if ($result->rowCount()){
+      $item = $result->fetch();
+      $value = $item["value"];
+    }
+    
+    return $value;
+  }
+  
   function createTable( $table, $fields, $fieldinfo ){
     global $pdo;
     
@@ -116,6 +137,10 @@
 	default:
 	  $type_str = "TEXT";
 	  lg( "failed to set type ");
+      }
+      
+      if (isset($fieldinfo[$field]['additional'])){
+	$type_str .= " ".$fieldinfo[$field]['additional'];
       }
       
       $field_str .= " ".q($field)." ".$type_str;

@@ -12,10 +12,15 @@
   
   
   connectToDb();
-
+  
+  setupConfigDb();
+  
+  // 
+  lockDb();
+  
   // 
   createEDPini();
-  
+ /* 
   // load complete table info from EDP
   getEDPTables();
 
@@ -47,7 +52,13 @@
   lg( "import done" );
   
   prepareDatabase();
+*/  
+  //
+  unlockDb();
   
+  setConfigDb( "lastSync", date("r") );
+  
+  // done
   lg( "bye" );
   echo "</pre>";  
 

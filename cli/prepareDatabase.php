@@ -1,5 +1,30 @@
 <?php
   
+  function setupConfigDb(){
+    
+    if (!tableExists(DB_CONFIG) ){
+      $fields = array( "key", "value" );
+
+      $fieldinfo["key"]["type"]=ASCII;
+      $fieldinfo["key"]["size"]=30;
+      $fieldinfo["key"]["additional"]='UNIQUE';
+      $fieldinfo["value"]["type"]=ASCII;
+      $fieldinfo["value"]["size"]=200;
+      
+      createTable( DB_CONFIG, $fields, $fieldinfo );
+    }
+    
+  }
+  
+  function lockDb(){
+    setConfigDb("dbLink", 0);
+  }
+  
+  function unlockDb(){
+    setConfigDb("dbLink", 1);
+  }
+  
+  
   function dbCreateTableArticle(){
   
     $table = DB_ARTICLE;

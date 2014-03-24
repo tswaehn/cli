@@ -31,6 +31,8 @@
     
   connectToDb();
   
+  checkForSiteDown();
+  
   addClientInfo( $action );
   
   switch ($action){	
