@@ -1,5 +1,8 @@
 <?php
  
+  include('./stats/graph.php');
+  
+ 
   function dbCreateClientAccess (){
     echo "<pre>";
     
@@ -32,6 +35,7 @@
 
   }
   
+
   function displayAccessByIP(){
     
     $table = DB_CLIENT_ACCESS;
@@ -66,7 +70,9 @@
     }
     echo "</table>";
     
+    
     echo "<p>";
+    
     
     // ---- table
     //$sql = "SELECT ip,host,info,count(*) as cnt FROM ".q($table)." WHERE 1 GROUP BY `ip`,`info` ORDER BY ip ASC, cnt DESC";
@@ -113,7 +119,8 @@
   
   echo "<p>";
   
-  echo '<a href="?action=stats&create=1" >reset all</a>';
+  // link disabled
+  //echo '<a href="?action=stats&create=1" >reset all</a>';
 
   $client = getUrlParam( "create" );
   
@@ -126,8 +133,12 @@
   }
    
   echo "<p>";
+
+  graphByDay();
+  graphTopUsers();
   
-  displayAccessByIP();
+  // table disabled
+  //displayAccessByIP();
 
 
 ?>

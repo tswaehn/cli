@@ -79,7 +79,7 @@
     
     $delta = number_format( $duration, 3 );
     
-    echo "request finished in ".$delta."sec<br>";
+    echo "request finished in ".$delta."sec - ".'<a href="?action=stats">stats</a><br>';
     echo 'Glaskugel <a href="./lib/history.php" target="_blank">'.BUILD_NR.'</a>';
     echo " - ";
     echo "letzter sync ".getConfigdb("lastSync");
