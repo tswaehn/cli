@@ -137,9 +137,12 @@
   echo '<embed src="./stats/graph.php?type=byday" type="image/svg+xml" width="600" height="400"
   pluginspage="http://www.adobe.com/svg/viewer/install/" />';
 */    
-  
-  echo  '<object id="1" data="./stats/graph.php?type=byuser" width="600" height="600" type="image/svg+xml" ></object>';
-  echo  '<object id="2" data="./stats/graph.php?type=byday" width="600" height="600" type="image/svg+xml" ></object>';
+
+  echo  '<object id="1" data="./stats/graph.php?type=byday" width="600" height="600" type="image/svg+xml" ></object>';
+
+  echo  '<object id="2" data="./stats/graph.php?type=byuser" width="600" height="600" type="image/svg+xml" ></object>';
+  echo "<br>";
+  echo  '<object id="3" data="./stats/graph.php?type=time" width="600" height="600" type="image/svg+xml" ></object>';
   
   //graphByDay();
   //graphTopUsers();
