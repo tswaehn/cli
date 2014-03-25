@@ -1,6 +1,6 @@
 <?php
   
-  define( "BUILD_NR", "v0.2.2");
+  define( "BUILD_NR", "v0.2.3");
   $scriptStartTime = microtime(true);
   
   include('./lib/lib.php');

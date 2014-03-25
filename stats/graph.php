@@ -1,10 +1,23 @@
 <?php
 
-    // http://www.goat1000.com/svggraph-using.php
-    include('./stats/SVGGraph/SVGGraph.php');
+  extract( $_GET, EXTR_PREFIX_ALL, "url" );
+  extract( $_POST, EXTR_PREFIX_ALL, "url" );
 
+  function lg($str){
+    // do nothing
+  }
+  
+  
+  include('../cli/dbConnection.php');
+  
+  // http://www.goat1000.com/svggraph-using.php
+  include('./SVGGraph/SVGGraph.php');
+
+  connectToDb();
+  
   function graphByDay(){
-
+  
+    
     $values=array();
   
     $sql = "SELECT DATE(`timestamp`) as date,count(*) AS cnt FROM ".q(DB_CLIENT_ACCESS)." WHERE `info` LIKE '%article%' GROUP BY `date` ORDER BY `date` ASC";
@@ -80,7 +93,7 @@
 
     
 
-    $graph = new SVGGraph(600, 600, $settings);
+    $graph = new SVGGraph(580, 580, $settings);
     
     $graph->Values($values);
     
@@ -92,7 +105,6 @@
   
   
   function graphTopUsers(){
-    
 
     $values=array();
   
@@ -138,7 +150,7 @@
 
     
 
-    $graph = new SVGGraph(600, 600, $settings);
+    $graph = new SVGGraph(580, 580, $settings);
     
     $graph->Values($values);
     
@@ -147,6 +159,14 @@
     echo $graph->Fetch('BarGraph');
     
     
+  }
+  
+  
+  switch( $url_type){
+    
+    case "byday": graphByDay();break;
+    case "byuser": graphTopUsers(); break;
+	
   }
   
   

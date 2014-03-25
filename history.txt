@@ -21,6 +21,9 @@ offene Punkte
   - import von arbeitsgängen
   - import von interner fertigung aus "Betr-Auftrag:Betriebsaufträge"
 
+2014 mar.25 - v0.2.3
+  - Anzeige von Statistik 
+  
 2014 mar.24 - v0.2.2
   - Anzeige des letzten Sync Zeitpunkts
 
