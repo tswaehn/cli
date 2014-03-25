@@ -84,3 +84,8 @@ a:active {
   text-align:center;
 
 }
+
+#footer {
+  font-size:small;
+  color:grey;
+}

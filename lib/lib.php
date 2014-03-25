@@ -46,6 +46,17 @@
       return in_array(strtolower($needle), array_map('strtolower', $haystack));
   }
   
+  function browserCheck(){
+    
+    $browser=getBrowser();
+    
+    if ($browser["name"] != 'Mozilla Firefox' ){
+      echo "Sie verwenden ".$browser["name"].". Die beste Darstellung erziehlen Sie allerdings mit Mozilla Firefox 24.3.0.";
+    }
+    // $yourbrowser= "Your browser: " . $ua['name'] . " " . $ua['version'] . " on " .$ua['platform'] . " reports: <br >" . $ua['userAgent'];
+    //echo $yourbrowser;
+  }
+  
   function generateColors( $count ){
     
     $red=rand(200,256);

@@ -3,6 +3,7 @@
   define( "BUILD_NR", "v0.2.3");
   $scriptStartTime = microtime(true);
   
+  include('./lib/browserCheck.php');
   include('./lib/lib.php');
   include('./cli/dbConnection.php');  
   include('./lib/siteDown.php');
@@ -28,7 +29,7 @@
     $action="search";
   }
   
-    
+  
   connectToDb();
   
   checkForSiteDown();
@@ -79,10 +80,14 @@
     
     $delta = number_format( $duration, 3 );
     
+    echo '<div id="footer">';
     echo "request finished in ".$delta."sec - ".'<a href="?action=stats">stats</a><br>';
     echo 'Glaskugel <a href="./lib/history.php" target="_blank">'.BUILD_NR.'</a>';
     echo " - ";
-    echo "letzter sync ".getConfigdb("lastSync");
+    echo "letzter sync ".getConfigdb("lastSync")."<br>";
+    
+    browserCheck();
+    echo '</div>';
     
   }
   

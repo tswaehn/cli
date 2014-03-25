@@ -23,6 +23,7 @@ offene Punkte
 
 2014 mar.25 - v0.2.3
   - Anzeige von Statistik 
+  - Browser detect
   
 2014 mar.24 - v0.2.2
   - Anzeige des letzten Sync Zeitpunkts
