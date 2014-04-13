@@ -85,7 +85,7 @@
     echo 'Glaskugel <a href="./lib/history.php" target="_blank">'.BUILD_NR.'</a>';
     echo " - ";
     echo "letzter sync ".getConfigdb("lastSync")."<br>";
-    
+    echo 'Im Internet <a href="http://abas.metagons-software.de" target="_blank" >abas.metagons-software.de</a>';
     browserCheck();
     echo '</div>';
     
